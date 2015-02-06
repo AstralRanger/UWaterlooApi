@@ -1,4 +1,4 @@
-# uWaterloo API C# Client
+# uWaterloo API - C# Client
 ---
 
 ###About
