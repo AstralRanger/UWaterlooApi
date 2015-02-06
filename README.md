@@ -2,7 +2,7 @@
 ---
 
 ###About
-A library created in C# that allows users to quickly and easily use uWaterloo's API. 
+A client library created in C# that allows users to quickly jump in and start using uWaterloo's OpenData API. 
 
 ###Where do I get my API key?
 https://api.uwaterloo.ca/
