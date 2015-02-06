@@ -13,11 +13,6 @@ Simply create a `UWaterlooApi` object and call the methods corresponding to the 
 ####Examples
 
 ```C#
-
 UWaterlooApi myUw = new UWaterlooApi("YOUR-API-KEY");
-myUw
 test.foodservices.menu(); 
-
-
-
 ```
