@@ -1,12 +1,13 @@
 # uWaterloo API C# Client
+---
 
-##About
+###About
 A library created in C# that allows users to quickly and easily use uWaterloo's API. 
 
-##Where do I get my API key?
+###Where do I get my API key?
 https://api.uwaterloo.ca/
 
-##Examples
+###Examples
 
 ```C#
 
