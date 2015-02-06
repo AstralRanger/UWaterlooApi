@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
-
 using System.Net;
 using System.IO;
  
@@ -56,16 +55,11 @@ namespace UWaterlooAPI.FoodServices
 		public IEnumerable<Outlet> outlets;
 	}
 
-
-	/* */
-
 	public class Note
 	{
 		public Date date { get; set; }
 		public string outlet_name { get; set; }
 		public int outlet_id { get; set; }
-
-		//TODO: 'note' *might* not be a string -- Specs aren't clear
 		public string note { get; set; }
 	}
 
@@ -83,17 +77,18 @@ namespace UWaterlooAPI.FoodServices
 
 	public class FoodServicesApiFactory
 	{
+		/* TODO: Have the functions actually call the API. Research Json.Net (?) -- Should be helpful in mapping fields. */
+
 		public UWaterlooAPI.ApiCall<WeeklyFoodMenu> menu()
 		{
-
 			UWaterlooAPI.ApiCall<WeeklyFoodMenu> WeeklyFoodMenu = new UWaterlooAPI.ApiCall<WeeklyFoodMenu>();
-
 			return WeeklyFoodMenu;
 		}
 
-		public Notes notes()
+		public UWaterlooAPI.ApiCall<Notes> notes()
 		{
-			return null;
+			UWaterlooAPI.ApiCall<Notes> notes = new UWaterlooAPI.ApiCall<Notes>();
+			return notes;
 		}
 	}
 }
