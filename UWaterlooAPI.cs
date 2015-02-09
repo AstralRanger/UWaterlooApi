@@ -1,14 +1,3 @@
-/*....By : Robinson Mann
- *..Date : 2/5/2015
- **********************/
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Runtime.CompilerServices;
 using UWaterlooAPI.FoodServices;
 
 namespace UWaterlooAPI
@@ -16,19 +5,19 @@ namespace UWaterlooAPI
 	/// <summary>
 	/// UWaterlooAPI Class
 	/// </summary>
-    public class UWaterlooAPI
+    public class UWaterlooApi
     {
 		// Your API key
-		readonly string apiKey;
+		readonly string _apiKey;
 
 		/// <summary>
 		/// Meta information from each function call
 		/// "method" not implemented
 		/// </summary>
-		public class meta
+		public class Meta
 		{
-			public int requests, timestamp, status, method_id, version;
-			public string message;
+			public int Requests, Timestamp, Status, MethodId, Version;
+			public string Message;
 		}
 
 		/// <summary>
@@ -37,29 +26,29 @@ namespace UWaterlooAPI
 		/// </summary>
 		/// <typeparam name="T">The type of data that the API call returns</typeparam>
 		public class ApiCall<T> where T : new() {
-			public meta	meta;
-			public T	data;
+			public Meta	Meta;
+			public T	Data;
 
 			/// <summary>
 			/// Default Constructor
 			/// </summary>
 			public ApiCall () {
-				meta = new UWaterlooAPI.meta();
-				data = new T();
+				Meta = new Meta();
+				Data = new T();
 			}
 		}
 				
 		
-		public readonly FoodServices.FoodServicesApiFactory foodservices;
+		public readonly FoodServicesApiService Foodservices;
 		
 		/// <summary>
 		/// Default constructor 
 		/// </summary>
 		/// <param name="apiKey">UWaterloo API Key</param>
-		public UWaterlooAPI(string apiKey) {
-			this.apiKey = apiKey;
+		public UWaterlooApi(string apiKey) {
+			_apiKey = apiKey;
 
-			foodservices = new FoodServicesApiFactory();
+			Foodservices = new FoodServicesApiService(apiKey);
 		}
 	}
 }
