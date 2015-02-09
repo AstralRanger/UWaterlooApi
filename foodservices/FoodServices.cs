@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
-using System.Text;
 using Newtonsoft.Json;
 
 // todo: Get Newtonsoft.Json to ignore _ when mapping to objects
@@ -24,7 +23,7 @@ namespace UWaterlooAPI.FoodServices
 	}
 
 	public class Outlet {
-		public string Outlet_Name { get; set; }
+		public string Outlet_Name { get; set; } 
 		public int? Outlet_Id { get; set; }
 		public IEnumerable<OutletMenu> Menu { get; set; }
 		public string Notes { get; set; }
@@ -73,14 +72,9 @@ namespace UWaterlooAPI.FoodServices
 	
 	public class Diet 
 	{
-		public int DietId {get;set;}
-		public string DietType {get;set;}
+		public int? Diet_Id {get;set;}
+		public string Diet_Type {get;set;}
 
-	}
-
-	public class Diets
-	{
-		public IEnumerable<Diet> diets;
 	}
 
 	public class OutletMore
@@ -107,7 +101,7 @@ namespace UWaterlooAPI.FoodServices
 		}
 		
 		/// <summary>
-		/// todo 
+		/// Official Documentation
 		/// </summary>
 		/// <param name="apiKey">Your UWaterloo API Key</param>
 		/// <returns></returns>
@@ -116,24 +110,31 @@ namespace UWaterlooAPI.FoodServices
 			// TODO: Make this compliant to ISO Standards. The offical API documentation is unclear in what, if any, standards it follows
 			var DateTimeUtcNow = DateTime.UtcNow;
 
+			// Generates the appropriate endpoint url
 			var request = string.Format("https://api.uwaterloo.ca/v2/foodservices/{0}/{1}/menu.json?key={2}",
 				DateTimeUtcNow.Year,
 				CultureInfo.GetCultureInfo("en").Calendar.GetWeekOfYear(DateTimeUtcNow, CalendarWeekRule.FirstDay, DayOfWeek.Monday),
 				_apiKey);
 
 			var json = new WebClient().DownloadString(request);
-
 			var returnObject = JsonConvert.DeserializeObject<UWaterlooApi.ApiCall<WeeklyFoodMenu>>(json);
+
 			return returnObject;
 		}
 
 		/// <summary>
-		/// todo
+		/// "This method returns additional notes regarding food served in the current week" (Official Documentation)
 		/// </summary>
-		/// <returns></returns>^
+		/// <returns>todo</returns>
 		public UWaterlooApi.ApiCall<Notes> Notes()
 		{
-			UWaterlooApi.ApiCall<Notes> notes = new UWaterlooApi.ApiCall<Notes>();
+			// Generates the appropriate endpoint url
+			var request = string.Format("http://api.uwaterloo.ca/v2/foodservices/notes.json?key={0}", _apiKey);
+
+			//Calls the endpoint
+			var json = new WebClient().DownloadString(request);
+
+			var notes = JsonConvert.DeserializeObject<UWaterlooApi.ApiCall<Notes>>(json);
 			return notes;
 		}
 
@@ -141,9 +142,16 @@ namespace UWaterlooAPI.FoodServices
 		/// todo
 		/// </summary>
 		/// <returns></returns>
-		public UWaterlooApi.ApiCall<Diets> Diets()
+		public UWaterlooApi.ApiCall<List<Diet>> Diets()
 		{
-			UWaterlooApi.ApiCall<Diets> diets = new UWaterlooApi.ApiCall<Diets>();
+			// Generates the appropriate endpoint url
+			var request = string.Format("http://api.uwaterloo.ca/v2/foodservices/diets.json?key={0}", _apiKey);
+
+			//Calls the endpoint
+			var json = new WebClient().DownloadString(request);
+
+			var diets = JsonConvert.DeserializeObject<UWaterlooApi.ApiCall<List<Diet>>>(json);
+
 			return diets;
 		}
 
@@ -155,6 +163,8 @@ namespace UWaterlooAPI.FoodServices
 		{
 			return null;
 		}
+
+
 
 	}
 }
