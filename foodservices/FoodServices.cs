@@ -79,11 +79,11 @@ namespace UWaterlooAPI.FoodServices
 
 	public class OutletMore
 	{
-		public int? OutletId { get; set; }
-		public string OutletName { get; set; }
-		public bool? HasBreakfast { get; set; }
-		public bool? HasLunch { get; set; }
-		public bool? HasDinner { get; set; }
+		public int? Outlet_Id { get; set; }
+		public string Outlet_Name { get; set; }
+		public bool? Has_Breakfast { get; set; }
+		public bool? Has_Lunch { get; set; }
+		public bool? Has_Dinner { get; set; }
 	}
 
 	public class OutletsMore 
@@ -159,9 +159,17 @@ namespace UWaterlooAPI.FoodServices
 		/// todo
 		/// </summary>
 		/// <returns> GET /foodservices/outlets </returns>
-		public UWaterlooApi.ApiCall<OutletMore> Outlets() 
+		public UWaterlooApi.ApiCall<List<OutletMore>> Outlets() 
 		{
-			return null;
+			// Generates the appropriate endpoint url
+			var request = string.Format("http://api.uwaterloo.ca/v2/foodservices/outlets.json?key={0}", _apiKey);
+
+			//Calls the endpoint
+			var json = new WebClient().DownloadString(request);
+
+			var outlets = JsonConvert.DeserializeObject <UWaterlooApi.ApiCall<List<OutletMore>>>(json);
+
+			return outlets;
 		}
 
 
