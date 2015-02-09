@@ -1,7 +1,6 @@
 /*....By : Robinson Mann
  *..Date : 2/3/2015
- *.About : Contians all the classes need for any of the foodserivces
- *         API calls, aswell as associated factory methods. 
+ *.About : Handles the foodservices/* api endpoints
  **********************/
 
 using System;
