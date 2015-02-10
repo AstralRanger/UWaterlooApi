@@ -94,7 +94,7 @@ namespace UWaterlooApi.FoodServices
 
 	public class FoodServicesApiService
 	{
-		// The users University of Waterloo Open Data API Key
+		// The Users University of Waterloo Open Data API Key
 		private readonly string _apiKey;
 
 		/// <summary>
@@ -109,7 +109,6 @@ namespace UWaterlooApi.FoodServices
 		/// <summary>
 		/// Official Documentation
 		/// </summary>
-		/// <returns>todo</returns>
 		public ApiRequest<WeeklyFoodMenu> Menu()
 		{
 			// TODO: Make this compliant to ISO Standards. The offical API documentation is unclear in what, if any, standards it follows
@@ -121,38 +120,32 @@ namespace UWaterlooApi.FoodServices
 				CultureInfo.GetCultureInfo("en").Calendar.GetWeekOfYear(dateTimeUtcNow, CalendarWeekRule.FirstDay, DayOfWeek.Monday));
 
 
-			return ApiRequest.ApiEndPointRequest<WeeklyFoodMenu>(request, _apiKey);
+			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest(request, _apiKey);
 		}
 		
 	
 		/// <summary>
 		/// "This method returns additional notes regarding food served in the current week" (Official Documentation)
 		/// </summary>
-		/// <returns>todo</returns>
 		public ApiRequest<Notes> Notes()
 		{
-			return ApiRequest.ApiEndPointRequest<Notes>("http://api.uwaterloo.ca/v2/foodservices/notes.json", _apiKey);
+			return ApiRequest<Notes>.CreateApiRequest("http://api.uwaterloo.ca/v2/foodservices/notes.json", _apiKey);
 		}
 
 		/// <summary>
 		/// todo
 		/// </summary>
-		/// <returns></returns>
 		public ApiRequest<List<Diet>> Diets()
 		{
-			return ApiRequest.ApiEndPointRequest<List<Diet>>("http://api.uwaterloo.ca/v2/foodservices/diets.json", _apiKey);
+			return ApiRequest<List<Diet>>.CreateApiRequest("http://api.uwaterloo.ca/v2/foodservices/diets.json", _apiKey);
 		}
 
 		/// <summary>
 		/// todo
 		/// </summary>
-		/// <returns></returns>
 		public ApiRequest<List<OutletMore>> Outlets()
 		{
-			return ApiRequest.ApiEndPointRequest<List<OutletMore>>("http://api.uwaterloo.ca/v2/foodservices/outlets.json", _apiKey);
+			return ApiRequest<List<OutletMore>>.CreateApiRequest("http://api.uwaterloo.ca/v2/foodservices/outlets.json", _apiKey);
 		}
-
-
-		
 	}
 }
