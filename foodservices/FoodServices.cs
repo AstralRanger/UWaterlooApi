@@ -107,7 +107,7 @@ namespace UWaterlooApi.FoodServices
 		}
 
 		/// <summary>
-		/// Official Documentation
+		/// "This method returns current week's food menu" (Official Documentation)
 		/// </summary>
 		public ApiRequest<WeeklyFoodMenu> Menu()
 		{
@@ -123,7 +123,6 @@ namespace UWaterlooApi.FoodServices
 			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest(request, _apiKey);
 		}
 		
-	
 		/// <summary>
 		/// "This method returns additional notes regarding food served in the current week" (Official Documentation)
 		/// </summary>
@@ -133,7 +132,7 @@ namespace UWaterlooApi.FoodServices
 		}
 
 		/// <summary>
-		/// todo
+		/// "This method returns a list of all diets" (Official Documentation)
 		/// </summary>
 		public ApiRequest<List<Diet>> Diets()
 		{
@@ -141,7 +140,7 @@ namespace UWaterlooApi.FoodServices
 		}
 
 		/// <summary>
-		/// todo
+		/// "This method returns a list of all outlets and their unique IDs, names and breakfast/lunch/dinner meal service indicators" (Official Documentation)
 		/// </summary>
 		public ApiRequest<List<OutletMore>> Outlets()
 		{
