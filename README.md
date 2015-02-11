@@ -16,3 +16,7 @@ Simply create a `UWaterlooApi` object and call the methods corresponding to the 
 UWaterlooApi myUw = new UWaterlooApi("YOUR-API-KEY");
 test.foodservices.menu(); 
 ```
+
+### Acknowledgments
+**University Of Waterloo**
+**Jonathan Keith** -- Creator of http://json2csharp.com/
