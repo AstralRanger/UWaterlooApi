@@ -3,11 +3,10 @@
  *.About : Handles the foodservices/* api endpoints
  **********************/
 
-using System;
-using UWaterlooApi;
 using System.Collections.Generic;
-using System.Globalization;
-using UWaterlooApi.ApiManager;
+using System.IO;
+using Newtonsoft.Json;
+using UWaterlooApi.ApiRequest;
 
 // todo: Get Newtonsoft.Json to ignore _ when mapping to objects
 
@@ -24,8 +23,10 @@ namespace UWaterlooApi.FoodServices
 
 	public class Outlet
 	{
-		public string Outlet_Name { get; set; }
-		public int? Outlet_Id { get; set; }
+		[JsonProperty("Outlet_Name")]
+		public string OutletName { get; set; }
+		[JsonProperty("Outlet_Id")]
+		public int? OutletId { get; set; }
 		public IEnumerable<OutletMenu> Menu { get; set; }
 		public string Notes { get; set; }
 	}
@@ -35,7 +36,7 @@ namespace UWaterlooApi.FoodServices
 		public string Date { get; set; }
 		public string Day { get; set; }
 		public Meals Meals { get; set; }
-		public string notes { get; set; }
+		public string Notes { get; set; }
 	}
 
 	public class Meals
@@ -46,9 +47,12 @@ namespace UWaterlooApi.FoodServices
 
 	public class Meal
 	{
-		public string Product_Name { get; set; }
-		public string Diet_Type { get; set; }
-		public string Product_Id { get; set; }
+		[JsonProperty("Product_Name")]
+		public string ProductName { get; set; }
+		[JsonProperty("Diet_Type")]
+		public string DietType { get; set; }
+		[JsonProperty("Product_Id")]
+		public string ProductId { get; set; }
 	}
 
 	public class WeeklyFoodMenu
@@ -58,7 +62,7 @@ namespace UWaterlooApi.FoodServices
 		public IEnumerable<Outlet> Outlets;
 	}
 
-	public class NoteEncapsulated
+	public class NoteComplete
 	{
 		public Date Date { get; set; }
 		public string OutletName { get; set; }
@@ -66,15 +70,14 @@ namespace UWaterlooApi.FoodServices
 		public string Note { get; set; }
 	}
 
-	public class Notes
-	{
-		public IEnumerable<NoteEncapsulated> notes;
-	}
 
 	public class Diet
 	{
-		public int? Diet_Id { get; set; }
-		public string Diet_Type { get; set; }
+		[JsonProperty("Diet_Id")]
+		public int? DietId { get; set; }
+
+		[JsonProperty("Diet_Type")]
+		public string DietType { get; set; }
 
 	}
 
@@ -123,6 +126,16 @@ namespace UWaterlooApi.FoodServices
 		/// <summary> "Predicts if the location is currently open by taking the current time into account" (Offical Documentation) </summary>
 		public bool Is_Open_Now { get; set; }
 
+		/// <summary> "Weekly operating hours data" (Offical Documentation) </summary>
+		public IEnumerable<LocationOpeningHours> Opening_Hours { get; set; }
+
+		/// <summary> "Special cases for operating hours" (Offical Documentation) </summary>
+		public IEnumerable<LocationOpeningHours> Special_Hours { get; set; }
+
+		/// <summary> "Y-m-d format list of dates the outlet is closed" (Offical Documentation) </summary>
+		public IEnumerable<string> Dates_Closed { get; set; } 
+
+
 	}	
 
 	/// <summary> "Weekly operating hours data"  (Official Documentation) </summary>
@@ -150,6 +163,132 @@ namespace UWaterlooApi.FoodServices
 		public bool Is_Closed { get; set; }
 	}
 
+	/// <summary> "Special cases for operating hours" (Offical Documentation) </summary>
+	public class SpecialHours
+	{
+
+		///<summary> "Y-m-d format date for the special case" (Offical Documentation) </summary>
+		public string date { get; set; }
+
+		///<summary> "Location's opening time (H:i format)" (Offical Documentation) </summary>
+		public string opening_hour { get; set; }
+
+		///<summary> "Location's closing time (H:i format)" (Offical Documentation) </summary>
+		public string closing_hour { get; set; }
+	}
+
+	public class Watcard
+	{
+		/// <summary> "Outlet ID number" (Offical Documentation) </summary>
+		public int vendor_id { get; set; }
+
+		/// <summary> "Vendor name" (Offical Documentation) </summary>
+		public string vendor_name { get; set; }
+	}
+
+	public class Announcements
+	{
+		/// <summary> "Advertisement date object" (Offical Documentation) </summary> 
+		public string date { get; set; }
+
+		/// <summary> "Advertisement text" (Offical Documentation) </summary> 
+		public string ad_text { get; set; }
+	}
+
+	public class Product
+	{
+		/// <summary> "Food item's numeric id" (Offical Documentation) </summary>
+		public int Product_Id { get; set; }
+
+		/// <summary> "Name of the food item" (Offical Documentation) </summary>
+		public string Product_Name { get; set; }
+
+		/// <summary> "Food ingredients" (Offical Documentation) </summary>
+		public string Ingredients { get; set; }
+
+		/// <summary> "Item's service size (in grams or whole)" (Offical Documentation) </summary>
+		public string Serving_Size { get; set; }
+
+		/// <summary> "Serving size in milliliters" (Offical Documentation) </summary>
+		public int Serving_Size_ml { get; set; }
+
+		/// <summary> "Serving size in grams" (Offical Documentation) </summary>
+		public int Serving_Size_g { get; set; }
+
+		/// <summary> "Food calorie count" (Offical Documentation) </summary>
+		public int Calories { get; set; }
+
+		/// <summary> "Total fat in grams" (Offical Documentation) </summary>
+		public int Total_Fat_g { get; set; }
+
+		/// <summary> "Total fat in percentage" (Offical Documentation) </summary>
+		public int Total_Fat_Percent { get; set; }
+
+		/// <summary> "Total saturated fat in grams" (Offical Documentation) </summary>
+		public int Fat_Saturated_g { get; set; }
+
+		/// <summary> "Total saturated fat in percentage" (Offical Documentation) </summary>
+		public int Fat_Saturated_Percent { get; set; }
+
+		/// <summary> "Total trans fat in grams" (Offical Documentation) </summary>
+		public int Fat_Trans_g { get; set; }
+
+		/// <summary> "Total trans fat in percentage" (Offical Documentation) </summary>
+		public int Fat_Trans_Percent { get; set; }
+
+		/// <summary> "Total cholesterol in milligrams" (Offical Documentation) </summary>
+		public int Cholesterol_mg { get; set; }
+
+		/// <summary> "Sodium in milligrams" (Offical Documentation) </summary>
+		public int Sodium_mg { get; set; }
+
+		/// <summary> "Sodium in percentage" (Offical Documentation) </summary>
+		public int Sodium_Percent { get; set; }
+
+		/// <summary> "Total carbohydrates in grams" (Offical Documentation) </summary>
+		public int Carbo_g { get; set; }
+
+		/// <summary> "Carbohydrates as percentage" (Offical Documentation) </summary>
+		public int Carbo_Percent { get; set; }
+
+		/// <summary> "Carbohydrate fibres in grams" (Offical Documentation) </summary>
+		public int Carbo_Fibre_g { get; set; }
+
+		/// <summary> "Carbohydrates fibers as percentage" (Offical Documentation) </summary>
+		public int Carbo_Fibre_Percent { get; set; }
+
+		/// <summary> "Carbohydrate sugar in grams" (Offical Documentation) </summary>
+		public int Carbo_Sugars_g { get; set; }
+
+		/// <summary> "Total protein in grams" (Offical Documentation) </summary>
+		public int Protein_g { get; set; }
+
+		/// <summary> "Total vitamin A percentage" (Offical Documentation) </summary>
+		public int Vitamin_A_Percent { get; set; }
+
+		/// <summary> "Total vitamin C percentage" (Offical Documentation) </summary>
+		public int Vitamin_C_Percent { get; set; }
+
+		/// <summary> "Total calcium percentage" (Offical Documentation) </summary>
+		public int Calcium_Percent { get; set; }
+
+		/// <summary> "Total iron percentage" (Offical Documentation) </summary>
+		public int Iron_Percent { get; set; }
+
+		/// <summary> "Micro nutrients in item" (Offical Documentation) </summary>
+		public string Micro_Nutrients { get; set; }
+
+		/// <summary> "Any eating tips for the item" (Offical Documentation) </summary>
+		public string Tips { get; set; }
+
+		/// <summary> "Foodservices given diet id" (Offical Documentation) </summary>
+		public int Diet_Id { get; set; }
+
+		/// <summary> "String representation of the diet_id" (Offical Documentation) </summary>
+		public string Diet_Type { get; set; }
+
+	}
+
 	public class FoodServicesApiService
 	{
 		// The Users University of Waterloo Open Data API Key
@@ -165,41 +304,111 @@ namespace UWaterlooApi.FoodServices
 		/// <summary> "This method returns current week's food menu" (Official Documentation) </summary>
 		public ApiRequest<WeeklyFoodMenu> Menu()
 		{
-			// TODO: Make this compliant to ISO Standards. The offical API documentation is unclear in what, if any, standards it follows
-			var dateTimeUtcNow = DateTime.UtcNow;
-
-			// Generates the appropriate endpoint url
-			var request = string.Format("https://api.uwaterloo.ca/v2/foodservices/{0}/{1}/menu.json",
-				dateTimeUtcNow.Year,
-				CultureInfo.GetCultureInfo("en").Calendar.GetWeekOfYear(dateTimeUtcNow, CalendarWeekRule.FirstDay, DayOfWeek.Monday));
-
-
-			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest(request, _apiKey);
+			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest("/foodservices/menu", _apiKey);
 		}
 		
 		/// <summary> "This method returns additional notes regarding food served in the current week" (Official Documentation) </summary>
-		public ApiRequest<Notes> Notes()
+		public ApiRequest<List<NoteComplete>> Notes()
 		{
-			return ApiRequest<Notes>.CreateApiRequest("http://api.uwaterloo.ca/v2/foodservices/notes.json", _apiKey);
+			return ApiRequest<List<NoteComplete>>.CreateApiRequest("/foodservices/notes", _apiKey);
 		}
 
 		/// <summary> "This method returns a list of all diets" (Official Documentation) </summary>
 		public ApiRequest<List<Diet>> Diets()
 		{
-			return ApiRequest<List<Diet>>.CreateApiRequest("http://api.uwaterloo.ca/v2/foodservices/diets.json", _apiKey);
+			return ApiRequest<List<Diet>>.CreateApiRequest("/foodservices/diets", _apiKey);
 		}
 
 		/// <summary> "This method returns a list of all outlets and their unique IDs, names and breakfast/lunch/dinner meal service indicators" (Official Documentation) </summary>
 		public ApiRequest<List<OutletMore>> Outlets()
 		{
-			return ApiRequest<List<OutletMore>>.CreateApiRequest("http://api.uwaterloo.ca/v2/foodservices/outlets.json", _apiKey);
+			return ApiRequest<List<OutletMore>>.CreateApiRequest("/foodservices/outlets", _apiKey);
 		}
 
 		/// <summary> "This method returns a list of all outlets and their operating hour data" (Offical Documentation) </summary>
 		public ApiRequest<List<Location>> Locations()
 		{
-			throw new NotImplementedException();
-			//return ApiRequest<List<Location>>.CreateApiRequest("https://api.uwaterloo.ca/v2/foodservices/locations.json", _apiKey);
+			return ApiRequest<List<Location>>.CreateApiRequest("/foodservices/locations", _apiKey);
 		}
+
+		/// <summary>
+		/// todo
+		/// </summary>
+		/// <returns></returns>
+		public ApiRequest<List<Watcard>> Watcard()
+		{
+			return ApiRequest<List<Watcard>>.CreateApiRequest("/foodservices/watcard", _apiKey);
+		}
+
+		/// <summary>
+		/// todo
+		/// </summary>
+		/// <returns></returns>
+		public ApiRequest<List<Announcements>> Announcements()
+		{
+			return ApiRequest<List<Announcements>>.CreateApiRequest("/foodservices/announcements", _apiKey);
+		}
+
+		/// <summary>
+		/// todo
+		/// </summary>
+		/// <param name="product"></param>
+		/// <returns></returns>
+		public ApiRequest<List<Announcements>> Products(int product)
+		{
+			return ApiRequest<List<Announcements>>.CreateApiRequest("/foodservices/announcements", _apiKey);
+		}
+
+		/// <summary>
+		/// todo
+		/// </summary>
+		/// <param name="year"></param>
+		/// <param name="week"></param>
+		/// <returns></returns>
+		public ApiRequest<WeeklyFoodMenu> Menu(int year, int week)
+		{
+			if (year < 0 || week <0)
+				throw new InvalidDataException();
+
+			// Generates the appropriate endpoint url
+			var request = string.Format("/foodservices/{0}/{1}/menu", year, week);
+
+			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest(request, _apiKey);
+		}
+
+		/// <summary>
+		/// todo
+		/// </summary>
+		/// <param name="year"></param>
+		/// <param name="week"></param>
+		/// <returns></returns>
+		public ApiRequest<List<NoteComplete>> Notes(int year, int week)
+		{
+			if (year < 0 || week < 0)
+				throw new InvalidDataException();
+
+			// Generates the appropriate endpoint url
+			var request = string.Format("/foodservices/{0}/{1}/notes", year, week);
+
+			return ApiRequest<List<NoteComplete>>.CreateApiRequest(request, _apiKey);
+		}
+
+		/// <summary>
+		/// todo
+		/// </summary>
+		/// <param name="year"></param>
+		/// <param name="week"></param>
+		/// <returns></returns>
+		public ApiRequest<List<Announcements>> Announcements(int year, int week)
+		{
+			if (year < 0 || week < 0)
+				throw new InvalidDataException();
+
+			// Generates the appropriate endpoint url
+			var request = string.Format("/foodservices/{0}/{1}/announcements", year, week);
+
+			return ApiRequest<List<Announcements>>.CreateApiRequest(request, _apiKey);
+		}
+
 	}
 }
