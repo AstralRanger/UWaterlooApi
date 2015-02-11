@@ -1,7 +1,7 @@
 using System.Net;
 using Newtonsoft.Json;
 
-namespace UWaterlooApi.ApiManager
+namespace UWaterlooApi.ApiRequest
 {
 	
 	/// <summary>
@@ -34,15 +34,15 @@ namespace UWaterlooApi.ApiManager
 		/// <summary>
 		/// Creates 
 		/// </summary>
-		/// <param name="apiUrl">The API endpoint to call</param>
+		/// <param name="apiUrl">The API endpoint to call (Should start with / and NOT include file format) </param>
 		/// <param name="apiKey">University of Waterloo Open Data API Key</param>
-		public static ApiRequest<T> CreateApiRequest (string apiUrl, string apiKey)
+		public static ApiRequest<T> CreateApiRequest (string endpoint, string apiKey)
 		{
 			string json;
 
 			using (var webClient = new WebClient())
 			{
-				json = webClient.DownloadString(string.Concat(apiUrl, "?key=", apiKey));
+				json = webClient.DownloadString(string.Concat("http://api.uwaterloo.ca/v2", endpoint, ".json", "?key=", apiKey));
 			}
 
 			return JsonConvert.DeserializeObject<ApiRequest<T>>(json);
