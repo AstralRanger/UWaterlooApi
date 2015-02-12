@@ -83,10 +83,15 @@ namespace UWaterlooApi.FoodServices
 
 	public class OutletMore
 	{
+		[JsonProperty("Outlet_Id")]
 		public int? Outlet_Id { get; set; }
+		[JsonProperty("Outlet_Name")]
 		public string Outlet_Name { get; set; }
+		[JsonProperty("Has_Breakfast")]
 		public bool? Has_Breakfast { get; set; }
+		[JsonProperty("Has_Lunch")]
 		public bool? Has_Lunch { get; set; }
+		[JsonProperty("Has_Dinner")]
 		public bool? Has_Dinner { get; set; }
 	}
 
@@ -154,12 +159,15 @@ namespace UWaterlooApi.FoodServices
 	public class LocationDayOfWeekOpeningHours
 	{
 		/// <summary> "Location's opening time (H:i format)" (Offical Documentation) </summary>
-		public string Opening_Hour { get; set; }
+		[JsonProperty("Opening_Hour")]
+		public string OpeningHour { get; set; }
 
 		/// <summary> "Location's closing time (H:i format)" (Offical Documentation) </summary>
-		public string Closing_Hour { get; set; }
+		[JsonProperty("Closing_Hour")]
+		public string ClosingHour { get; set; }
 
 		/// <summary> "If the location is closed on that day" (Offical Documentation) </summary>
+		[JsonProperty("Is_Closed")]
 		public bool Is_Closed { get; set; }
 	}
 
