@@ -8,8 +8,6 @@ using System.IO;
 using Newtonsoft.Json;
 using UWaterlooApi.ApiRequest;
 
-// todo: Get Newtonsoft.Json to ignore _ when mapping to objects
-
 namespace UWaterlooApi.FoodServices
 {
 
@@ -84,15 +82,15 @@ namespace UWaterlooApi.FoodServices
 	public class OutletMore
 	{
 		[JsonProperty("Outlet_Id")]
-		public int? Outlet_Id { get; set; }
+		public int? OutletId { get; set; }
 		[JsonProperty("Outlet_Name")]
-		public string Outlet_Name { get; set; }
+		public string OutletName { get; set; }
 		[JsonProperty("Has_Breakfast")]
-		public bool? Has_Breakfast { get; set; }
+		public bool? HasBreakfast { get; set; }
 		[JsonProperty("Has_Lunch")]
-		public bool? Has_Lunch { get; set; }
+		public bool? HasLunch { get; set; }
 		[JsonProperty("Has_Dinner")]
-		public bool? Has_Dinner { get; set; }
+		public bool? HasDinner { get; set; }
 	}
 
 	public class OutletsMore
@@ -105,10 +103,12 @@ namespace UWaterlooApi.FoodServices
 	{
 
 		/// <summary> "Outlet ID number (not always same as outlets.json method). Can be null" (Offical Documentation) </summary>
-		public int Outlet_id { get; set; }
+		[JsonProperty("Outlet_id")]
+		public int OutletId { get; set; }
 
 		/// <summary> "Outlet name" (Offical Documentation) </summary>
-		public string Outlet_name { get; set; }
+		[JsonProperty("Outlet_name")]
+		public string OutletName { get; set; }
 
 		/// <summary> "Name of the building the outlet is located" (Offical Documentation) </summary>
 		public string Building { get; set; }
@@ -129,16 +129,20 @@ namespace UWaterlooApi.FoodServices
 		public string Notice { get; set; }
 
 		/// <summary> "Predicts if the location is currently open by taking the current time into account" (Offical Documentation) </summary>
-		public bool Is_Open_Now { get; set; }
+		[JsonProperty("Is_Open_Now")]
+		public bool IsOpenNow { get; set; }
 
 		/// <summary> "Weekly operating hours data" (Offical Documentation) </summary>
-		public IEnumerable<LocationOpeningHours> Opening_Hours { get; set; }
+		[JsonProperty("Opening_Hours")]
+		public IEnumerable<LocationOpeningHours> OpeningHours { get; set; }
 
 		/// <summary> "Special cases for operating hours" (Offical Documentation) </summary>
-		public IEnumerable<LocationOpeningHours> Special_Hours { get; set; }
+		[JsonProperty("Special_Hours")]
+		public IEnumerable<LocationOpeningHours> SpecialHours { get; set; }
 
 		/// <summary> "Y-m-d format list of dates the outlet is closed" (Offical Documentation) </summary>
-		public IEnumerable<string> Dates_Closed { get; set; } 
+		[JsonProperty("Dates_Closed")]
+		public IEnumerable<string> DatesClosed { get; set; } 
 
 
 	}	
@@ -168,7 +172,7 @@ namespace UWaterlooApi.FoodServices
 
 		/// <summary> "If the location is closed on that day" (Offical Documentation) </summary>
 		[JsonProperty("Is_Closed")]
-		public bool Is_Closed { get; set; }
+		public bool IsClosed { get; set; }
 	}
 
 	/// <summary> "Special cases for operating hours" (Offical Documentation) </summary>
@@ -176,31 +180,36 @@ namespace UWaterlooApi.FoodServices
 	{
 
 		///<summary> "Y-m-d format date for the special case" (Offical Documentation) </summary>
-		public string date { get; set; }
+		public string Date { get; set; }
 
 		///<summary> "Location's opening time (H:i format)" (Offical Documentation) </summary>
-		public string opening_hour { get; set; }
+		[JsonProperty("opening_hour")]
+		public string OpeningHour { get; set; }
 
 		///<summary> "Location's closing time (H:i format)" (Offical Documentation) </summary>
-		public string closing_hour { get; set; }
+		[JsonProperty("closing_hour")]
+		public string ClosingHour { get; set; }
 	}
 
 	public class Watcard
 	{
 		/// <summary> "Outlet ID number" (Offical Documentation) </summary>
-		public int vendor_id { get; set; }
+		[JsonProperty("vender_id")]
+		public int VendorId { get; set; }
 
 		/// <summary> "Vendor name" (Offical Documentation) </summary>
-		public string vendor_name { get; set; }
+		[JsonProperty("vendor_name")]
+		public string VendorName { get; set; }
 	}
 
 	public class Announcements
 	{
 		/// <summary> "Advertisement date object" (Offical Documentation) </summary> 
-		public string date { get; set; }
+		public string Date { get; set; }
 
 		/// <summary> "Advertisement text" (Offical Documentation) </summary> 
-		public string ad_text { get; set; }
+		[JsonProperty("ad_text")] 
+		public string AdText { get; set; }
 	}
 
 	public class Product
