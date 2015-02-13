@@ -122,7 +122,7 @@ namespace UWaterlooAPI.Courses
 		public object StartDate { get; set; }
 		[JsonProperty("end_date")]
 		public object EndDate { get; set; }
-		[JsonProperty("_tba")]
+		[JsonProperty("is_tba")]
 		public bool IsTba { get; set; }
 		[JsonProperty("is_cancelled")]
 		public bool IsCancelled { get; set; }
