@@ -16,6 +16,19 @@ Simply create a `UWaterlooApi` object and call the methods corresponding to the 
 UWaterlooApi myUw = new UWaterlooApi("YOUR-API-KEY");
 test.foodservices.menu(); 
 ```
+###Status
+* **Food Services** - Classes completed. Need JsonProperty Tags
+* **Course** - Classes completed. Need JsonProperty Tags
+* **Events** - Not Started
+* **News** - Not Started
+* **Weather** - Completed
+* **Terms** - Not Started
+* **Resources** - Not Started
+* **Definitions and Codes** - Not Started
+* **Building** - Not Started
+* **API** - Not Started
+* **Server** - Not Started
+
 
 ### Acknowledgments
 **University Of Waterloo**
