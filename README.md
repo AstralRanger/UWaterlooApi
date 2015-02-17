@@ -27,7 +27,7 @@ test.foodservices.menu();
 * **Definitions and Codes** - Not Started
 * **Building** - Not Started
 * **API** - Not Started
-* **Server** - Not Started
+* **Server** - Completed
 
 
 ### Acknowledgments
