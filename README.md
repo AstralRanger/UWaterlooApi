@@ -31,6 +31,6 @@ test.foodservices.menu();
 
 
 ### Acknowledgments
-**University Of Waterloo**
+**University of Waterloo**
 
 **Jonathan Keith** -- Creator of http://json2csharp.com/
