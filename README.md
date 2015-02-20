@@ -24,8 +24,8 @@ test.foodservices.menu();
 * **Weather** - Completed
 * **Terms** - Not Started
 * **Resources** - Started
-* **Definitions and Codes** - Not Started
-* **Building** - Not Started
+* **Definitions and Codes** - Started
+* **Building** - Started
 * **API** - Not Started
 * **Server** - Completed
 
