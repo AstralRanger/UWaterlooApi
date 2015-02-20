@@ -23,7 +23,7 @@ test.foodservices.menu();
 * **News** - Not Started
 * **Weather** - Completed
 * **Terms** - Not Started
-* **Resources** - Not Started
+* **Resources** - Started
 * **Definitions and Codes** - Not Started
 * **Building** - Not Started
 * **API** - Not Started
