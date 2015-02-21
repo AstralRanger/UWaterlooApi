@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using UWaterlooApi.ApiRequest;
+using UWaterlooApi.FoodServices;
 
 namespace UWaterlooAPI.DefinitionsAndCodes
 {
@@ -8,22 +10,22 @@ namespace UWaterlooAPI.DefinitionsAndCodes
 	/// </summary>
 	public class OrganizationalUnit
 	{
-		/// <summary> "Organizational Unit code" (Offical Documentation) </summary>
+		/// <summary> "Organizational Unit code" (Official Documentation) </summary>
 		[JsonProperty("unit_code")]
 		public string UnitCode { get; set; }
-		/// <summary> "Unit's parent group" (Offical Documentation) </summary>
+		/// <summary> "Unit's parent group" (Official Documentation) </summary>
 		[JsonProperty("group_code")]
 		public string GroupCode { get; set; }
-		/// <summary> "Organizational Units short name" (Offical Documentation) </summary>
+		/// <summary> "Organizational Units short name" (Official Documentation) </summary>
 		[JsonProperty("unit_short_name")]
 		public string UnitShortName { get; set; }
-		/// <summary> "Units full name" (Offical Documentation) </summary>
+		/// <summary> "Units full name" (Official Documentation) </summary>
 		[JsonProperty("unit_full_name")]
 		public string UnitFullName { get; set; }
 	}
 
 	/// <summary>
-	/// WARNING: Offical Documentation IS INCORRECT!
+	/// todo
 	/// </summary>
 	public class Term
 	{
@@ -38,13 +40,13 @@ namespace UWaterlooAPI.DefinitionsAndCodes
 	/// </summary>
 	public class Group
 	{
-		/// <summary> "Group Code" (Offical Documentation) </summary>
+		/// <summary> "Group Code" (Official Documentation) </summary>
 		[JsonProperty("group_code")]
 		public string GroupCode { get; set; }
-		/// <summary> "Group Short Name" (Offical Documentation) </summary>
+		/// <summary> "Group Short Name" (Official Documentation) </summary>
 		[JsonProperty("group_short_name")]
 		public string GroupShortName { get; set; }
-		/// <summary> "Full group name" (Offical Documentation) </summary>
+		/// <summary> "Full group name" (Official Documentation) </summary>
 		[JsonProperty("group_full_name")]
 		public string GroupFullName { get; set; }
 	}
@@ -54,11 +56,11 @@ namespace UWaterlooAPI.DefinitionsAndCodes
 	/// </summary>
 	public class Subject
 	{
-		/// <summary> "Subject" (Offical Documentation) </summary>
+		/// <summary> "Subject" (Official Documentation) </summary>
 		public string SubjectTitle { get; set; }
-		/// <summary> "Description of subject" (Offical Documentation) </summary>
+		/// <summary> "Description of subject" (Official Documentation) </summary>
 		public string Description { get; set; }
-		/// <summary> "Subjects parent unit" (Offical Documentation) </summary>
+		/// <summary> "Subjects parent unit" (Official Documentation) </summary>
 		public string Unit { get; set; }
 	}
 
@@ -67,9 +69,9 @@ namespace UWaterlooAPI.DefinitionsAndCodes
 	/// </summary>
 	public class Instructions
 	{
-		/// <summary> "Abbreviation" (Offical Documentation) </summary>
+		/// <summary> "Abbreviation" (Official Documentation) </summary>
 		public string Abbreviation { get; set; }
-		/// <summary> "Description" (Offical Documentation) </summary>
+		/// <summary> "Description" (Official Documentation) </summary>
 		public string Description { get; set; }
 	}
 
@@ -86,6 +88,51 @@ namespace UWaterlooAPI.DefinitionsAndCodes
 		public DefinitionsAndCodesApi(string apiKey)
 		{
 			_apiKey = apiKey;
+		}
+
+		/// <summary>
+		/// "Code Lookups for Organizational Units" (Official Documentation)
+		/// </summary>
+		/// <returns> "This method returns a list of all code lookups and their respective descriptions for organizations." (Official Documentation) </returns>
+		public ApiRequest<List<OrganizationalUnit>> Units()
+		{
+			return ApiRequest<List<OrganizationalUnit>>.CreateApiRequest("/codes/units", _apiKey);
+		}
+
+		/// <summary>
+		/// "Code Lookups for Terms" (Official Documentation)
+		/// </summary>
+		/// <returns> "This method returns a list of all code lookups for terms." (Official Documentation) </returns>
+		public ApiRequest<List<Term>> Terms()
+		{
+			return ApiRequest<List<Term>>.CreateApiRequest("/codes/terms", _apiKey);
+		}
+
+		/// <summary>
+		/// "Code Lookups for Groups" (Official Documentation)
+		/// </summary>
+		/// <returns> "This method returns a list of all code lookups for groups." (Official Documentation) </returns>
+		public ApiRequest<List<Group>> Groups()
+		{
+			return ApiRequest<List<Group>>.CreateApiRequest("/codes/groups", _apiKey);
+		}
+
+		/// <summary> 
+		/// "Code Lookups for subjects" (Official Documentation)
+		/// </summary>
+		/// <returns> "This method returns a list of all code lookups for subjects." (Official Documentation) </returns>
+		public ApiRequest<List<Subject>> Subjects()
+		{
+			return ApiRequest<List<Subject>>.CreateApiRequest("/codes/subjects", _apiKey);
+		}
+		
+		/// <summary> 
+		/// "List of Instructions" (Official Documentation)
+		/// </summary>
+		/// <returns> "This method returns a list of Instructions." (Official Documentation) </returns>
+		public ApiRequest<List<Instructions>> Instructions()
+		{
+			return ApiRequest<List<Instructions>>.CreateApiRequest("/codes/instructions", _apiKey);
 		}
 	}
 }
