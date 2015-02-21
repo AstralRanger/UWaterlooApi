@@ -3,6 +3,7 @@
 
 ###About
 A client library created in C# that allows users to quickly jump in and start using uWaterloo's OpenData API. 
+This will hopefully help create a lower barrier of entry to the API, as users will no longer have to worry about Anonymous Types, WebClients, JSON, etc.
 
 ###Where do I get my API key?
 https://api.uwaterloo.ca/
@@ -24,7 +25,7 @@ test.foodservices.menu();
 * **Weather** - Completed
 * **Terms** - Not Started
 * **Resources** - Started
-* **Definitions and Codes** - Started
+* **Definitions and Codes** - Mostly Complete. Needs additional summarys
 * **Building** - Started
 * **API** - Not Started
 * **Server** - Completed
