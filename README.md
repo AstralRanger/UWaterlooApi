@@ -18,20 +18,27 @@ UWaterlooApi myUw = new UWaterlooApi("YOUR-API-KEY");
 test.foodservices.menu(); 
 ```
 ###Status
-* **Food Services** - Classes completed. Need JsonProperty Tags
-* **Course** - Classes completed. Need JsonProperty Tags
-* **Events** - Not Started
-* **News** - Not Started
-* **Weather** - Completed
-* **Terms** - Not Started
-* **Resources** - Started
-* **Definitions and Codes** - Mostly Complete. Needs additional summarys
-* **Building** - Started
-* **API** - Not Started
-* **Server** - Completed
+Status information about each module
+#### Completed
+* **Server**
+* **Weather**
 
+#### Started
+* **Food Services**
+* **Course**
+* **Resources**
+* **Definitions and Codes**
+* **Building**
+
+#### Not started
+* **Events**
+* **News**
+* **Terms**
+* **API**
+
+### Dependencies 
+* **Newtonsoft.Json**
 
 ### Acknowledgments
-**University of Waterloo**
-
-**Jonathan Keith** -- Creator of http://json2csharp.com/
+* **University of Waterloo**
+* **Jonathan Keith** -- Creator of http://json2csharp.com/
