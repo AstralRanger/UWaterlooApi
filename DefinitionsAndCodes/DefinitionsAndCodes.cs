@@ -6,7 +6,7 @@ using UWaterlooApi.FoodServices;
 namespace UWaterlooAPI.DefinitionsAndCodes
 {
 	/// <summary>
-	/// todo
+	/// Info about an organization unit.
 	/// </summary>
 	public class OrganizationalUnit
 	{
@@ -25,7 +25,7 @@ namespace UWaterlooAPI.DefinitionsAndCodes
 	}
 
 	/// <summary>
-	/// todo
+	/// Info about the naming convertion of a term
 	/// </summary>
 	public class Term
 	{
