@@ -22,13 +22,13 @@ Status information about each module
 ### Completed
 * **Server**
 * **Weather**
+* **Building**
 
 ### Started
 * **Food Services**
 * **Course**
 * **Resources**
 * **Definitions and Codes**
-* **Building**
 
 ### Not started
 * **Events**
