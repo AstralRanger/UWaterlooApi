@@ -11,7 +11,7 @@ https://api.uwaterloo.ca/
 ##How do I call the correct endpoint?
 Simply create a `UWaterlooApi` object and call the methods corresponding to the endpoint paths outlined in https://github.com/uWaterloo/api-documentation
 
-##Examples
+##Usage
 
 ```C#
 UWaterlooApi myUw = new UWaterlooApi("YOUR-API-KEY");
