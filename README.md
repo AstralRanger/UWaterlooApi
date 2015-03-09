@@ -25,18 +25,16 @@ Status information about each module
 * **Server**
 * **Weather**
 * **Building**
+* **Event**
+* **News**
+* **Terms**
+* **API**
 
 ### Started
 * **Food Services**
 * **Course**
 * **Resources**
 * **Definitions and Codes**
-
-### Not started
-* **Events**
-* **News**
-* **Terms**
-* **API**
 
 ## Dependencies 
 * **Newtonsoft.Json**
