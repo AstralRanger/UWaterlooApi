@@ -1,7 +1,8 @@
 using UWaterlooApi.FoodServices;
-using UWaterlooAPI.Courses;
-using UWaterlooAPI.Server;
-using UWaterlooAPI.Weather;
+using UWaterlooApi.Courses;
+using UWaterlooApi.Events;
+using UWaterlooApi.Server;
+using UWaterlooApi.Weather;
 
 namespace UWaterlooApi
 {
@@ -15,6 +16,7 @@ namespace UWaterlooApi
 		public readonly CoursesApi Courses;
 		public readonly ServerApi Server;
 		public readonly WeatherApi Weather;
+		public readonly EventsApi Events;
 
 		/// <summary>
 		/// Default constructor 
@@ -25,6 +27,7 @@ namespace UWaterlooApi
 			Courses = new CoursesApi(apiKey);
 			Server = new ServerApi(apiKey);
 			Weather = new WeatherApi(apiKey);
+			Events = new EventsApi(apiKey);
 		}
 	}
 }
