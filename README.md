@@ -3,7 +3,9 @@
 
 ##About
 A client library created in C# that allows users to quickly jump in and start using uWaterloo's OpenData API. 
-This will hopefully help create a lower barrier of entry to the API, as users will no longer have to worry about Anonymous Types, WebClients, JSON, etc.
+This will hopefully help create a lower barrier of entry to the API, as users will no longer have to worry about dynamics, WebClients, JSON, etc.
+
+Almost all of the code in the endpoint classes was generated based off information in the published JSON specifications.
 
 ##Where do I get my API key?
 https://api.uwaterloo.ca/
@@ -41,4 +43,3 @@ Status information about each module
 
 ## Acknowledgments
 * **University of Waterloo**
-* **Jonathan Keith** -- Creator of http://json2csharp.com/
