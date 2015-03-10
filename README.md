@@ -18,23 +18,6 @@ UWaterlooApi myUw = new UWaterlooApi("YOUR-API-KEY");
 test.foodservices.menu(); 
 ```
 
-##Status
-Status information about each module
-### Completed
-* **Server**
-* **Weather**
-* **Building**
-* **Event**
-* **News**
-* **Terms**
-* **API**
-
-### Started
-* **Food Services**
-* **Course**
-* **Resources**
-* **Definitions and Codes**
-
 ## Dependencies 
 * **Newtonsoft.Json**
 
