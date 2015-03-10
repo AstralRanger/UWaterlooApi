@@ -63,7 +63,7 @@ namespace UWaterlooApi.Terms
 	}
 
 	/// <summary> "Employer Info Sessions by Term" (Official Documentation) </summary> 
-	public class EmployerInfoSessionsByTerm
+	public class EmployerInfoSessions
 	{
 		/// <summary> "Information session id" (Official Documentation) </summary> 
 		public int Id { get; set; }
@@ -181,7 +181,7 @@ namespace UWaterlooApi.Terms
 	}
 
 	/// <summary> "Subject Schedule by Term" (Official Documentation) </summary> 
-	public class SubjectScheduleByTerm
+	public class SubjectSchedule
 	{
 		/// <summary> "Requested subject acronym" (Official Documentation) </summary> 
 		public string Subject { get; set; }
@@ -304,9 +304,9 @@ namespace UWaterlooApi.Terms
 		/// Update Frequency: Weekly
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<EmployerInfoSessionsByTerm>> EmployerInfoSessionsByTerm(string term)
+		public ApiRequest<List<EmployerInfoSessions>> EmployerInfoSessionsByTerm(string term)
 		{
-			return ApiRequest<List<EmployerInfoSessionsByTerm>>.CreateApiRequest(string.Format("/terms/{0}/infosessions", term), _apiKey);
+			return ApiRequest<List<EmployerInfoSessions>>.CreateApiRequest(string.Format("/terms/{0}/infosessions", term), _apiKey);
 		}
 
 		/// <summary>
@@ -326,9 +326,9 @@ namespace UWaterlooApi.Terms
 		/// Update Frequency: Every hour
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<SubjectScheduleByTerm>> SubjectScheduleByTerm(string term, string subject)
+		public ApiRequest<List<SubjectSchedule>> SubjectScheduleByTerm(string term, string subject)
 		{
-			return ApiRequest<List<SubjectScheduleByTerm>>.CreateApiRequest(string.Format("/terms/{0}/{1}/schedule", term, subject), _apiKey);
+			return ApiRequest<List<SubjectSchedule>>.CreateApiRequest(string.Format("/terms/{0}/{1}/schedule", term, subject), _apiKey);
 		}
 
 	}
