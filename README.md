@@ -8,24 +8,30 @@ This will hopefully help create a lower barrier of entry to the API, as users wi
 
 ##Usage
 
-Include 
+API calls are made by calling endpoints on the UWaterloApi class. e.g. `uWaterlooApi.FoodServices.WeeklyFoodMenu(2013, 12)`
+
+All API calls return type uWaterlooApi.ApiRequest &lt;T&gt; where T is the data class revelent to the API call.
+
+ApiRequest&lt;T&gt; is a wrapper containing 2 fields: meta, and data.
+- meta cotnains information about the API call.
+- data is type T and contains the relevent data returned from the API call.
+
+
+####Examples
 
 ```C#
-using UWaterlooApi.  
+using uWaterlooApi;
+UWaterlooApi uWaterlooApiClient = new UWaterlooApi("YOUR-API-KEY");
+```
 
-...
 
-UWaterlooApi myUw = new UWaterlooApi("YOUR-API-KEY");
-
+To get the Weekly Food menu for the 12th week of 2013 
+```C#
 var foodServicesWeeklyMenu = uwaterlooApiClient.FoodServices.WeeklyFoodMenu(2013, 12);
-
 ```
 
 ##Where do I get my API key?
 https://api.uwaterloo.ca/
-
-##How do I call the correct endpoint?
-Simply create a `UWaterlooApi` object and call the methods corresponding to the endpoint paths outlined in https://github.com/uWaterloo/api-documentation
 
 ## Dependencies 
 * **Newtonsoft.Json**
