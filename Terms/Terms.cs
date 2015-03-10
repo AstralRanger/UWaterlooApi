@@ -1,9 +1,10 @@
-/* By Robinson Mann */
+﻿// Copyright (c) Robinson Mann
+// Licensed under the MIT License, See LICENSE.txt for more information.
 
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace UWaterlooApi.Terms
+namespace uWaterlooApi.Terms
 {
 
 	/// <summary> "Terms Listings" (Official Documentation) </summary> 

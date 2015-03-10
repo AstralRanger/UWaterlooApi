@@ -1,85 +1,85 @@
+﻿// Copyright (c) Robinson Mann
+// Licensed under the MIT License, See LICENSE.txt for more information.
+
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using UWaterlooApi.ApiRequest;
-using UWaterlooApi.FoodServices;
 
-namespace UWaterlooAPI.DefinitionsAndCodes
+namespace uWaterlooApi.DefinitionsAndCodes
 {
-	/// <summary>
-	/// Info about an organization unit.
-	/// </summary>
-	public class OrganizationalUnit
+
+	/// <summary> "Code Lookups for Groups" (Official Documentation) </summary> 
+	public class CodeLookupsForGroups
 	{
-		/// <summary> "Organizational Unit code" (Official Documentation) </summary>
-		[JsonProperty("unit_code")]
-		public string UnitCode { get; set; }
-		/// <summary> "Unit's parent group" (Official Documentation) </summary>
+		/// <summary> "Group Code" (Official Documentation) </summary> 
 		[JsonProperty("group_code")]
 		public string GroupCode { get; set; }
-		/// <summary> "Organizational Units short name" (Official Documentation) </summary>
-		[JsonProperty("unit_short_name")]
-		public string UnitShortName { get; set; }
-		/// <summary> "Units full name" (Official Documentation) </summary>
-		[JsonProperty("unit_full_name")]
-		public string UnitFullName { get; set; }
-	}
 
-	/// <summary>
-	/// Info about the naming convertion of a term
-	/// </summary>
-	public class Term
-	{
-		/// <summary> todo </summary>
-		public string Abbreviation { get; set; }
-		/// <summary> todo </summary>
-		public string Description { get; set; }
-	}
-
-	/// <summary>
-	/// todo
-	/// </summary>
-	public class Group
-	{
-		/// <summary> "Group Code" (Official Documentation) </summary>
-		[JsonProperty("group_code")]
-		public string GroupCode { get; set; }
-		/// <summary> "Group Short Name" (Official Documentation) </summary>
+		/// <summary> "Group Short Name" (Official Documentation) </summary> 
 		[JsonProperty("group_short_name")]
 		public string GroupShortName { get; set; }
-		/// <summary> "Full group name" (Official Documentation) </summary>
+
+		/// <summary> "Full group name" (Official Documentation) </summary> 
 		[JsonProperty("group_full_name")]
 		public string GroupFullName { get; set; }
 	}
 
-	/// <summary>
-	/// todo
-	/// </summary>
-	public class Subject
+	/// <summary> "List of Instructions" (Official Documentation) </summary> 
+	public class ListOfInstructions
 	{
-		/// <summary> "Subject" (Official Documentation) </summary>
-		public string SubjectTitle { get; set; }
-		/// <summary> "Description of subject" (Official Documentation) </summary>
+		/// <summary> "Abbreviation" (Official Documentation) </summary> 
+		public string Abbreviation { get; set; }
+
+		/// <summary> "Description" (Official Documentation) </summary> 
 		public string Description { get; set; }
-		/// <summary> "Subjects parent unit" (Official Documentation) </summary>
+	}
+
+	/// <summary> "Code Lookups for subjects" (Official Documentation) </summary> 
+	public class CodeLookupsForSubjects
+	{
+		/// <summary> "Subject" (Official Documentation) </summary> 
+		public string Subject { get; set; }
+
+		/// <summary> "Description of subject" (Official Documentation) </summary> 
+		public string Description { get; set; }
+
+		/// <summary> "Subjects parent unit" (Official Documentation) </summary> 
 		public string Unit { get; set; }
 	}
 
-	/// <summary>
-	/// todo
-	/// </summary>
-	public class Instructions
+	/// <summary> "Code Lookups for Terms" (Official Documentation) </summary> 
+	public class CodeLookupsForTerms
 	{
-		/// <summary> "Abbreviation" (Official Documentation) </summary>
-		public string Abbreviation { get; set; }
-		/// <summary> "Description" (Official Documentation) </summary>
+		/// <summary> "Term" (Official Documentation) </summary> 
+		public string Term { get; set; }
+
+		/// <summary> "Description of term" (Official Documentation) </summary> 
 		public string Description { get; set; }
 	}
 
-	/// <summary>
-	/// todo
-	/// </summary>
+	/// <summary> "Code Lookups for Organizational Units" (Official Documentation) </summary> 
+	public class CodeLookupsForOrganizationalUnits
+	{
+		/// <summary> "Organizational Unit code" (Official Documentation) </summary> 
+		[JsonProperty("unit_code")]
+		public string UnitCode { get; set; }
+
+		/// <summary> "Unit's parent group" (Official Documentation) </summary> 
+		[JsonProperty("group_code")]
+		public string GroupCode { get; set; }
+
+		/// <summary> "Organizational Units short name" (Official Documentation) </summary> 
+		[JsonProperty("unit_short_name")]
+		public string UnitShortName { get; set; }
+
+		/// <summary> "Units full name" (Official Documentation) </summary> 
+		[JsonProperty("unit_full_name")]
+		public string UnitFullName { get; set; }
+	}
+
+	/// <summary> Definitions And Codes Endpoints </summary> 
 	public class DefinitionsAndCodesApi
 	{
+
 		// The Users University of Waterloo Open Data API Key
 		private readonly string _apiKey;
 
@@ -91,48 +91,59 @@ namespace UWaterlooAPI.DefinitionsAndCodes
 		}
 
 		/// <summary>
-		/// "Code Lookups for Organizational Units" (Official Documentation)
+		/// Official Method Name: Code Lookups for Groups
+		/// Description: This method returns a list of all code lookups for groups.
+		/// Update Frequency: When updated by steward/via pull request
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <returns> "This method returns a list of all code lookups and their respective descriptions for organizations." (Official Documentation) </returns>
-		public ApiRequest<List<OrganizationalUnit>> Units()
+		public ApiRequest<List<CodeLookupsForGroups>> CodeLookupsForGroups()
 		{
-			return ApiRequest<List<OrganizationalUnit>>.CreateApiRequest("/codes/units", _apiKey);
+			return ApiRequest<List<CodeLookupsForGroups>>.CreateApiRequest("/codes/groups", _apiKey);
 		}
 
 		/// <summary>
-		/// "Code Lookups for Terms" (Official Documentation)
+		/// Official Method Name: List of Instructions
+		/// Description: This method returns a list of Instructions.
+		/// Update Frequency: When updated by steward/via pull request
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <returns> "This method returns a list of all code lookups for terms." (Official Documentation) </returns>
-		public ApiRequest<List<Term>> Terms()
+		public ApiRequest<List<ListOfInstructions>> ListOfInstructions()
 		{
-			return ApiRequest<List<Term>>.CreateApiRequest("/codes/terms", _apiKey);
+			return ApiRequest<List<ListOfInstructions>>.CreateApiRequest("/codes/instructions", _apiKey);
 		}
 
 		/// <summary>
-		/// "Code Lookups for Groups" (Official Documentation)
+		/// Official Method Name: Code Lookups for subjects
+		/// Description: This method returns a list of all code lookups for subjects.
+		/// Update Frequency: When updated by steward/via pull request
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <returns> "This method returns a list of all code lookups for groups." (Official Documentation) </returns>
-		public ApiRequest<List<Group>> Groups()
+		public ApiRequest<List<CodeLookupsForSubjects>> CodeLookupsForSubjects()
 		{
-			return ApiRequest<List<Group>>.CreateApiRequest("/codes/groups", _apiKey);
+			return ApiRequest<List<CodeLookupsForSubjects>>.CreateApiRequest("/codes/subjects", _apiKey);
 		}
 
-		/// <summary> 
-		/// "Code Lookups for subjects" (Official Documentation)
+		/// <summary>
+		/// Official Method Name: Code Lookups for Terms
+		/// Description: This method returns a list of all code lookups for terms.
+		/// Update Frequency: When updated by steward/via pull request
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <returns> "This method returns a list of all code lookups for subjects." (Official Documentation) </returns>
-		public ApiRequest<List<Subject>> Subjects()
+		public ApiRequest<List<CodeLookupsForTerms>> CodeLookupsForTerms()
 		{
-			return ApiRequest<List<Subject>>.CreateApiRequest("/codes/subjects", _apiKey);
+			return ApiRequest<List<CodeLookupsForTerms>>.CreateApiRequest("/codes/terms", _apiKey);
 		}
-		
-		/// <summary> 
-		/// "List of Instructions" (Official Documentation)
+
+		/// <summary>
+		/// Official Method Name: Code Lookups for Organizational Units
+		/// Description: This method returns a list of all code lookups and their respective descriptions for organizations.
+		/// Update Frequency: When updated by steward/via pull request
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <returns> "This method returns a list of Instructions." (Official Documentation) </returns>
-		public ApiRequest<List<Instructions>> Instructions()
+		public ApiRequest<List<CodeLookupsForOrganizationalUnits>> CodeLookupsForOrganizationalUnits()
 		{
-			return ApiRequest<List<Instructions>>.CreateApiRequest("/codes/instructions", _apiKey);
+			return ApiRequest<List<CodeLookupsForOrganizationalUnits>>.CreateApiRequest("/codes/units", _apiKey);
 		}
+
 	}
 }

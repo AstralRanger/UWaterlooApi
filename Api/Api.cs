@@ -1,10 +1,10 @@
-/* By Robinson Mann */
+﻿// Copyright (c) Robinson Mann
+// Licensed under the MIT License, See LICENSE.txt for more information.
 
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using UWaterlooApi.ApiRequest;
 
-namespace UWaterlooAPI.Api
+namespace uWaterlooApi.Api
 {
 
 	/// <summary> "API Changelog" (Official Documentation) </summary> 

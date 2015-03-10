@@ -1,183 +1,408 @@
+﻿// Copyright (c) Robinson Mann
+// Licensed under the MIT License, See LICENSE.txt for more information.
+
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using UWaterlooApi.ApiRequest;
 
-namespace UWaterlooAPI.Courses
+namespace uWaterlooApi.Courses
 {
-	/// <summary> "This method returns all the courses offered under a given subject" (Offical Documentation) </summary>
-	public class CourseSubject
+
+	/// <summary> "Course Schedule by Class Number" (Official Documentation) </summary> 
+	public class CourseScheduleByClassNumber
 	{
-		[JsonProperty("course_id")]
-		public string CourseId { get; set; }
+		/// <summary> "Requested subject acronym" (Official Documentation) </summary> 
 		public string Subject { get; set; }
+
+		/// <summary> "Registrar assigned class number" (Official Documentation) </summary> 
 		[JsonProperty("catalog_number")]
 		public string CatalogNumber { get; set; }
-		public string Title { get; set; }
-		public double Units { get; set; }
-		public string Description { get; set; }
-		[JsonProperty("academic_level")]
-		public string AcademicLevel { get; set; }
-	}
 
-	/// <summary> "This method returns all available information for a given course" (Offical Documentation) </summary>
-	public class CourseInformation
-	{
-		[JsonProperty("course_id")]
-		public string CourseId { get; set; }
-		public string Subject { get; set; }
-		[JsonProperty("catalog_number")]
-		public string CatalogNumber { get; set; }
-		public string Title { get; set; }
+		/// <summary> "Credit count for the mentioned course" (Official Documentation) </summary> 
 		public double Units { get; set; }
-		public string Description { get; set; }
-		public List<string> Instructions { get; set; }
-		public string Prerequisites { get; set; }
-		public string Antirequisites { get; set; }
-		public string Corequisites { get; set; }
-		public object Crosslistings { get; set; }
-		[JsonProperty("terms_offered")]
-		public List<string> TermsOffered { get; set; }
-		public string Notes { get; set; }
-		public Offerings Offerings { get; set; }
-		[JsonProperty("needs_department_consent")]
-		public bool NeedsDepartmentConsent { get; set; }
-		[JsonProperty("needs_instructor_consent")]
-		public bool NeedsInstructorConsent { get; set; }
-		public List<object> Extra { get; set; }
-		[JsonProperty("calendar_year")]
-		public string CalendarYear { get; set; }
-		public string Url { get; set; }
-		[JsonProperty("academic_level")]
-		public string AcademicLevel { get; set; }
-	}
 
-	/// <summary> "Brief course description" (Offical Documentation) </summary>
-	public class Offerings
-	{
-		[JsonProperty("online")]
-		public bool Online { get; set; }
-		[JsonProperty("online_only")]
-		public bool OnlineOnly { get; set; }
-		[JsonProperty("st_jerome")]
-		public bool StJerome { get; set; }
-		[JsonProperty("st_jerome_only")]
-		public bool StJeromeOnly { get; set; }
-		[JsonProperty("renison")]
-		public bool Renison { get; set; }
-		[JsonProperty("renison_only")]
-		public bool RenisonOnly { get; set; }
-		[JsonProperty("conrad_grebel")]
-		public bool ConradGrebel { get; set; }
-		[JsonProperty("conrad_grebel_only")]
-		public bool ConradGrebelOnly { get; set; }
-	}
-
-	/// <summary> "This method returns the class schedule for a given course and term" (Offical Documentation) </summary>
-	public class CourseSchedule
-	{
-		public string Subject { get; set; }
-		[JsonProperty("catalog_number")]
-		public string CatalogNumber { get; set; }
-		public double Units { get; set; }
+		/// <summary> "Class name and title" (Official Documentation) </summary> 
 		public string Title { get; set; }
-		public object Note { get; set; }
+
+		/// <summary> "Additional notes regarding enrollment for the given term" (Official Documentation) </summary> 
+		public string Note { get; set; }
+
+		/// <summary> "Associated term specific class enrollment number" (Official Documentation) </summary> 
 		[JsonProperty("class_number")]
 		public int ClassNumber { get; set; }
+
+		/// <summary> "Class instruction and number" (Official Documentation) </summary> 
 		public string Section { get; set; }
+
+		/// <summary> "Name of the campus the course is being offered" (Official Documentation) </summary> 
 		public string Campus { get; set; }
+
+		/// <summary> "Associated class id" (Official Documentation) </summary> 
 		[JsonProperty("associated_class")]
 		public int AssociatedClass { get; set; }
+
+		/// <summary> "Name of the related course component" (Official Documentation) </summary> 
 		[JsonProperty("related_component_1")]
-		public object RelatedComponent1 { get; set; }
+		public string RelatedComponent1 { get; set; }
+
+		/// <summary> "Name of the second related course component" (Official Documentation) </summary> 
 		[JsonProperty("related_component_2")]
-		public object RelatedComponent2 { get; set; }
+		public string RelatedComponent2 { get; set; }
+
+		/// <summary> "Class enrollment capacity" (Official Documentation) </summary> 
 		[JsonProperty("enrollment_capacity")]
 		public int EnrollmentCapacity { get; set; }
+
+		/// <summary> "Total current class enrollment" (Official Documentation) </summary> 
 		[JsonProperty("enrollment_total")]
 		public int EnrollmentTotal { get; set; }
+
+		/// <summary> "Class waiting capacity" (Official Documentation) </summary> 
 		[JsonProperty("waiting_capacity")]
 		public int WaitingCapacity { get; set; }
+
+		/// <summary> "Total current waiting students" (Official Documentation) </summary> 
 		[JsonProperty("waiting_total")]
-		public int WaitingTotal { get; set; }
-		public object Topic { get; set; }
-		public List<object> Reserves { get; set; }
-		public List<Class> Classes { get; set; }
+		public string WaitingTotal { get; set; }
+
+		/// <summary> "Class discussion topic" (Official Documentation) </summary> 
+		public string Topic { get; set; }
+
+		/// <summary> "Course specific enrollment reservation data" (Official Documentation) </summary> 
+		public object Reserves { get; set; }
+
+		/// <summary> "Schedule data" (Official Documentation) </summary> 
+		public object Classes { get; set; }
+
+		/// <summary> "A list of classes the course is held with" (Official Documentation) </summary> 
 		[JsonProperty("held_with")]
 		public List<string> HeldWith { get; set; }
+
+		/// <summary> "4 digit term representation" (Official Documentation) </summary> 
 		public int Term { get; set; }
+
+		/// <summary> "Undergraduate or graduate course classification" (Official Documentation) </summary> 
 		[JsonProperty("academic_level")]
 		public string AcademicLevel { get; set; }
+
+		/// <summary> "ISO8601 timestamp of when the data was last updated" (Official Documentation) </summary> 
 		[JsonProperty("last_updated")]
 		public string LastUpdated { get; set; }
 	}
 
-	public class Dates
+	/// <summary> "Course Information (by course_id)" (Official Documentation) </summary> 
+	public class CourseInformationByCourseId
 	{
-		[JsonProperty("start_time")]
-		public string StartTime { get; set; }
-		[JsonProperty("end_time")]
-		public string EndTime { get; set; }
-		public string Weekdays { get; set; }
-		[JsonProperty("start_date")]
-		public object StartDate { get; set; }
-		[JsonProperty("end_date")]
-		public object EndDate { get; set; }
-		[JsonProperty("is_tba")]
-		public bool IsTba { get; set; }
-		[JsonProperty("is_cancelled")]
-		public bool IsCancelled { get; set; }
-		[JsonProperty("is_closed")]
-		public bool IsClosed { get; set; }
-	}
+		/// <summary> "Registrar assigned course ID" (Official Documentation) </summary> 
+		[JsonProperty("course_id")]
+		public string CourseId { get; set; }
 
-	public class Location
-	{
-		public string Building { get; set; }
-		public string Room { get; set; }
-	}
-
-	public class Class
-	{
-		public Dates Dates { get; set; }
-		public Location Location { get; set; }
-		public List<string> Instructors { get; set; }
-	}
-
-	public class CoursePrerequisites
-	{
+		/// <summary> "Requested subject acronym" (Official Documentation) </summary> 
 		public string Subject { get; set; }
+
+		/// <summary> "Registrar assigned class number" (Official Documentation) </summary> 
 		[JsonProperty("catalog_number")]
 		public string CatalogNumber { get; set; }
+
+		/// <summary> "Class name and title" (Official Documentation) </summary> 
 		public string Title { get; set; }
+
+		/// <summary> "Credit count for the mentioned course" (Official Documentation) </summary> 
+		public double Units { get; set; }
+
+		/// <summary> "Brief course description" (Official Documentation) </summary> 
+		public string Description { get; set; }
+
+		/// <summary> "Instruction types for the course (LEC, TUT, LAB etc)" (Official Documentation) </summary> 
+		public List<string> Instructions { get; set; }
+
+		/// <summary> "Prerequisite listing for the course" (Official Documentation) </summary> 
 		public string Prerequisites { get; set; }
-		[JsonProperty("prerequisites_parsed")]
-		public List<List<object>> PrerequisitesParsed { get; set; }
+
+		/// <summary> "Antirequisite listing for the course" (Official Documentation) </summary> 
+		public string Antirequisites { get; set; }
+
+		/// <summary> "Corequisite listing for the course" (Official Documentation) </summary> 
+		public string Corequisites { get; set; }
+
+		/// <summary> "Crosslisted courses" (Official Documentation) </summary> 
+		public string Crosslistings { get; set; }
+
+		/// <summary> "List of terms that the course is offered" (Official Documentation) </summary> 
+		[JsonProperty("terms_offered")]
+		public List<string> TermsOffered { get; set; }
+
+		/// <summary> "Additional notes on the course" (Official Documentation) </summary> 
+		public string Notes { get; set; }
+
+		/// <summary> "Brief course description" (Official Documentation) </summary> 
+		public object Offerings { get; set; }
+
+		/// <summary> "Does enrollment require the department's permission" (Official Documentation) </summary> 
+		[JsonProperty("needs_department_consent")]
+		public bool NeedsDepartmentConsent { get; set; }
+
+		/// <summary> "Does enrollment require instructor's consent" (Official Documentation) </summary> 
+		[JsonProperty("needs_instructor_consent")]
+		public bool NeedsInstructorConsent { get; set; }
+
+		/// <summary> "Any additional information associated with the course" (Official Documentation) </summary> 
+		public List<string> Extra { get; set; }
+
+		/// <summary> "Last active year the course was offered" (Official Documentation) </summary> 
+		[JsonProperty("calendar_year")]
+		public string CalendarYear { get; set; }
+
+		/// <summary> "Course URL on the course calendar" (Official Documentation) </summary> 
+		public string Url { get; set; }
+
+		/// <summary> "Undergraduate or graduate course classification" (Official Documentation) </summary> 
+		[JsonProperty("academic_level")]
+		public string AcademicLevel { get; set; }
 	}
 
-	public class CourseSection
+	/// <summary> "Subject Listings" (Official Documentation) </summary> 
+	public class SubjectListings
 	{
+		/// <summary> "Registrar assigned course ID" (Official Documentation) </summary> 
+		[JsonProperty("course_id")]
+		public string CourseId { get; set; }
+
+		/// <summary> "Requested subject acronym" (Official Documentation) </summary> 
+		public string Subject { get; set; }
+
+		/// <summary> "Registrar assigned class number" (Official Documentation) </summary> 
+		[JsonProperty("catalog_number")]
+		public string CatalogNumber { get; set; }
+
+		/// <summary> "Class name and title" (Official Documentation) </summary> 
+		public string Title { get; set; }
+
+		/// <summary> "Credit count for the mentioned course" (Official Documentation) </summary> 
+		public double Units { get; set; }
+
+		/// <summary> "Brief course description" (Official Documentation) </summary> 
+		public string Description { get; set; }
+
+		/// <summary> "Undergraduate or graduate course classification" (Official Documentation) </summary> 
+		[JsonProperty("academic_level")]
+		public string AcademicLevel { get; set; }
+	}
+
+	/// <summary> "Course Information" (Official Documentation) </summary> 
+	public class CourseInformation
+	{
+		/// <summary> "Registrar assigned course ID" (Official Documentation) </summary> 
+		[JsonProperty("course_id")]
+		public string CourseId { get; set; }
+
+		/// <summary> "Requested subject acronym" (Official Documentation) </summary> 
+		public string Subject { get; set; }
+
+		/// <summary> "Registrar assigned class number" (Official Documentation) </summary> 
+		[JsonProperty("catalog_number")]
+		public string CatalogNumber { get; set; }
+
+		/// <summary> "Class name and title" (Official Documentation) </summary> 
+		public string Title { get; set; }
+
+		/// <summary> "Credit count for the mentioned course" (Official Documentation) </summary> 
+		public double Units { get; set; }
+
+		/// <summary> "Brief course description" (Official Documentation) </summary> 
+		public string Description { get; set; }
+
+		/// <summary> "Instruction types for the course (LEC, TUT, LAB etc)" (Official Documentation) </summary> 
+		public List<string> Instructions { get; set; }
+
+		/// <summary> "Prerequisite listing for the course" (Official Documentation) </summary> 
+		public string Prerequisites { get; set; }
+
+		/// <summary> "Antirequisite listing for the course" (Official Documentation) </summary> 
+		public string Antirequisites { get; set; }
+
+		/// <summary> "Corequisite listing for the course" (Official Documentation) </summary> 
+		public string Corequisites { get; set; }
+
+		/// <summary> "Crosslisted courses" (Official Documentation) </summary> 
+		public string Crosslistings { get; set; }
+
+		/// <summary> "List of terms that the course is offered" (Official Documentation) </summary> 
+		[JsonProperty("terms_offered")]
+		public List<string> TermsOffered { get; set; }
+
+		/// <summary> "Additional notes on the course" (Official Documentation) </summary> 
+		public string Notes { get; set; }
+
+		/// <summary> "Brief course description" (Official Documentation) </summary> 
+		public object Offerings { get; set; }
+
+		/// <summary> "Does enrollment require the department's permission" (Official Documentation) </summary> 
+		[JsonProperty("needs_department_consent")]
+		public bool NeedsDepartmentConsent { get; set; }
+
+		/// <summary> "Does enrollment require instructor's consent" (Official Documentation) </summary> 
+		[JsonProperty("needs_instructor_consent")]
+		public bool NeedsInstructorConsent { get; set; }
+
+		/// <summary> "Any additional information associated with the course" (Official Documentation) </summary> 
+		public List<string> Extra { get; set; }
+
+		/// <summary> "Last active year the course was offered" (Official Documentation) </summary> 
+		[JsonProperty("calendar_year")]
+		public string CalendarYear { get; set; }
+
+		/// <summary> "Course URL on the course calendar" (Official Documentation) </summary> 
+		public string Url { get; set; }
+
+		/// <summary> "Undergraduate or graduate course classification" (Official Documentation) </summary> 
+		[JsonProperty("academic_level")]
+		public string AcademicLevel { get; set; }
+	}
+
+	/// <summary> "sections" (Official Documentation) </summary> 
+	public class Sections
+	{
+		/// <summary> "Exam section number" (Official Documentation) </summary> 
 		public string Section { get; set; }
+
+		/// <summary> "Day of the exam" (Official Documentation) </summary> 
 		public string Day { get; set; }
+
+		/// <summary> "ISO8601 exam date representation" (Official Documentation) </summary> 
 		public string Date { get; set; }
+
+		/// <summary> "Exam starting time" (Official Documentation) </summary> 
 		[JsonProperty("start_time")]
 		public string StartTime { get; set; }
+
+		/// <summary> "Exam ending time" (Official Documentation) </summary> 
 		[JsonProperty("end_time")]
 		public string EndTime { get; set; }
+
+		/// <summary> "Exam location" (Official Documentation) </summary> 
 		public string Location { get; set; }
+
+		/// <summary> "Additional notes regarding the section" (Official Documentation) </summary> 
 		public string Notes { get; set; }
 	}
 
+	/// <summary> "Exam Schedule" (Official Documentation) </summary> 
 	public class ExamSchedule
 	{
+		/// <summary> "Full course name (subject and catalog number)" (Official Documentation) </summary> 
 		public string Course { get; set; }
-		public List<CourseSection> Sections { get; set; }
+
+		/// <summary> "Exam schedule for all sections of the course" (Official Documentation) </summary> 
+		public List<Sections> Sections { get; set; }
 	}
 
-	/// <summary>
-	/// todo
-	/// </summary>
+	/// <summary> "Course Prerequisites" (Official Documentation) </summary> 
+	public class CoursePrerequisites
+	{
+		/// <summary> "Requested subject acronym" (Official Documentation) </summary> 
+		public string Subject { get; set; }
+
+		/// <summary> "Registrar assigned class number" (Official Documentation) </summary> 
+		[JsonProperty("catalog_number")]
+		public string CatalogNumber { get; set; }
+
+		/// <summary> "Class name and title" (Official Documentation) </summary> 
+		public string Title { get; set; }
+
+		/// <summary> "Raw listing of course prerequisites" (Official Documentation) </summary> 
+		public double Prerequisites { get; set; }
+
+		/// <summary> "Parsed prerequisites" (Official Documentation) </summary> 
+		[JsonProperty("prerequisites_parsed")]
+		public List<string> PrerequisitesParsed { get; set; }
+	}
+
+	/// <summary> "Course Schedule" (Official Documentation) </summary> 
+	public class CourseSchedule
+	{
+		/// <summary> "Requested subject acronym" (Official Documentation) </summary> 
+		public string Subject { get; set; }
+
+		/// <summary> "Registrar assigned class number" (Official Documentation) </summary> 
+		[JsonProperty("catalog_number")]
+		public string CatalogNumber { get; set; }
+
+		/// <summary> "Credit count for the mentioned course" (Official Documentation) </summary> 
+		public double Units { get; set; }
+
+		/// <summary> "Class name and title" (Official Documentation) </summary> 
+		public string Title { get; set; }
+
+		/// <summary> "Additional notes regarding enrollment for the given term" (Official Documentation) </summary> 
+		public string Note { get; set; }
+
+		/// <summary> "Associated term specific class enrollment number" (Official Documentation) </summary> 
+		[JsonProperty("class_number")]
+		public int ClassNumber { get; set; }
+
+		/// <summary> "Class instruction and number" (Official Documentation) </summary> 
+		public string Section { get; set; }
+
+		/// <summary> "Name of the campus the course is being offered" (Official Documentation) </summary> 
+		public string Campus { get; set; }
+
+		/// <summary> "Associated class id" (Official Documentation) </summary> 
+		[JsonProperty("associated_class")]
+		public int AssociatedClass { get; set; }
+
+		/// <summary> "Name of the related course component" (Official Documentation) </summary> 
+		[JsonProperty("related_component_1")]
+		public string RelatedComponent1 { get; set; }
+
+		/// <summary> "Name of the second related course component" (Official Documentation) </summary> 
+		[JsonProperty("related_component_2")]
+		public string RelatedComponent2 { get; set; }
+
+		/// <summary> "Class enrollment capacity" (Official Documentation) </summary> 
+		[JsonProperty("enrollment_capacity")]
+		public int EnrollmentCapacity { get; set; }
+
+		/// <summary> "Total current class enrollment" (Official Documentation) </summary> 
+		[JsonProperty("enrollment_total")]
+		public int EnrollmentTotal { get; set; }
+
+		/// <summary> "Class waiting capacity" (Official Documentation) </summary> 
+		[JsonProperty("waiting_capacity")]
+		public int WaitingCapacity { get; set; }
+
+		/// <summary> "Total current waiting students" (Official Documentation) </summary> 
+		[JsonProperty("waiting_total")]
+		public string WaitingTotal { get; set; }
+
+		/// <summary> "Class discussion topic" (Official Documentation) </summary> 
+		public string Topic { get; set; }
+
+		/// <summary> "Course specific enrollment reservation data" (Official Documentation) </summary> 
+		public object Reserves { get; set; }
+
+		/// <summary> "Schedule data" (Official Documentation) </summary> 
+		public object Classes { get; set; }
+
+		/// <summary> "A list of classes the course is held with" (Official Documentation) </summary> 
+		[JsonProperty("held_with")]
+		public List<string> HeldWith { get; set; }
+
+		/// <summary> "4 digit term representation" (Official Documentation) </summary> 
+		public int Term { get; set; }
+
+		/// <summary> "Undergraduate or graduate course classification" (Official Documentation) </summary> 
+		[JsonProperty("academic_level")]
+		public string AcademicLevel { get; set; }
+
+		/// <summary> "ISO8601 timestamp of when the data was last updated" (Official Documentation) </summary> 
+		[JsonProperty("last_updated")]
+		public string LastUpdated { get; set; }
+	}
+
+	/// <summary> Courses Endpoints </summary> 
 	public class CoursesApi
 	{
+
 		// The Users University of Waterloo Open Data API Key
 		private readonly string _apiKey;
 
@@ -189,77 +414,81 @@ namespace UWaterlooAPI.Courses
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Course Schedule by Class Number
+		/// Description: This method returns the class schedule for a given course and term
+		/// Update Frequency: Every hour
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="subject"></param>
-		/// <returns></returns>
-		public ApiRequest<CourseSubject> Subject(string subject)
+		public ApiRequest<List<CourseScheduleByClassNumber>> CourseScheduleByClassNumber(int classNumber)
 		{
-			return ApiRequest<CourseSubject>.CreateApiRequest(string.Concat("/courses/", subject), _apiKey);
+			return ApiRequest<List<CourseScheduleByClassNumber>>.CreateApiRequest(string.Format("/courses/{0}/schedule", classNumber), _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Course Information (by course_id)
+		/// Description: This method returns all available information for a given course
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="courseId"></param>
-		/// <returns></returns>
-		public ApiRequest<CourseInformation> CourseInformation(string courseId)
+		public ApiRequest<List<CourseInformationByCourseId>> CourseInformationByCourseId(int courseId)
 		{
-			return ApiRequest<CourseInformation>.CreateApiRequest(string.Concat("/courses/", courseId), _apiKey);
+			return ApiRequest<List<CourseInformationByCourseId>>.CreateApiRequest(string.Format("/courses/{0}", courseId), _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Subject Listings
+		/// Description: This method returns all the courses offered under a given subject
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="classNumber"></param>
-		/// <returns></returns>
-		public ApiRequest<List<CourseInformation>> CourseSchedule(string classNumber)
+		public ApiRequest<List<SubjectListings>> SubjectListings(string subject)
 		{
-			return ApiRequest<List<CourseInformation>>.CreateApiRequest(string.Concat("/courses/", classNumber, "/schedule"), _apiKey);
+			return ApiRequest<List<SubjectListings>>.CreateApiRequest("/courses/" + subject, _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Course Information
+		/// Description: This method returns all available information for a given course
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="subject"></param>
-		/// <param name="catalogNumber"></param>
-		/// <returns></returns>
-		public ApiRequest<CourseInformation> CourseInformation(string subject, string catalogNumber)
+		public ApiRequest<List<CourseInformation>> CourseInformation(string subject, int catalogNumber)
 		{
-			return ApiRequest<CourseInformation>.CreateApiRequest(string.Concat("/courses/", subject, "/", catalogNumber), _apiKey);
+			return ApiRequest<List<CourseInformation>>.CreateApiRequest(string.Format("/courses/{0}/{1}", subject, catalogNumber), _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Exam Schedule
+		/// Description: This method returns a given course's exam schedule
+		/// Update Frequency: Once a day
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="subject"></param>
-		/// <param name="catalogNumber"></param>
-		/// <returns></returns>
-		public ApiRequest<List<CourseInformation>> CourseSchedule(string subject, string catalogNumber)
+		public ApiRequest<List<ExamSchedule>> ExamSchedule(string subject, int catalogNumber)
 		{
-			return ApiRequest<List<CourseInformation>>.CreateApiRequest(string.Concat("/courses/", subject, "/", catalogNumber, "/schedule"), _apiKey);
+			return ApiRequest<List<ExamSchedule>>.CreateApiRequest(string.Format("/courses/{0}/{1}/examschedule", subject, catalogNumber), _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Course Prerequisites
+		/// Description: This method returns parsed and raw representation of prerequsites for a given course
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="subject"></param>
-		/// <param name="catalogNumber"></param>
-		/// <returns></returns>
-		public ApiRequest<CoursePrerequisites> CoursePrerequisites(string subject, string catalogNumber)
+		public ApiRequest<List<CoursePrerequisites>> CoursePrerequisites(string subject, int catalogNumber)
 		{
-			return ApiRequest<CoursePrerequisites>.CreateApiRequest(string.Concat("/courses/", subject, "/", catalogNumber, "/prerequisites"), _apiKey);
+			return ApiRequest<List<CoursePrerequisites>>.CreateApiRequest(string.Format("/courses/{0}/{1}/prerequisites", subject, catalogNumber), _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Course Schedule
+		/// Description: This method returns the class schedule for a given course and term
+		/// Update Frequency: Every hour
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="subject"></param>
-		/// <param name="catalogNumber"></param>
-		/// <returns></returns>
-		public ApiRequest<CoursePrerequisites> ExamSchedule(string subject, string catalogNumber)
+		public ApiRequest<List<CourseSchedule>> CourseSchedule(string subject, int catalogNumber)
 		{
-			return ApiRequest<CoursePrerequisites>.CreateApiRequest(string.Concat("/courses/", subject, "/", catalogNumber, "/examschedule"), _apiKey);
+			return ApiRequest<List<CourseSchedule>>.CreateApiRequest(string.Format("/courses/{0}/ {1}/schedule", subject, catalogNumber), _apiKey);
 		}
+
 	}
 }

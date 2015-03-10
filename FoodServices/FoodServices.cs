@@ -1,430 +1,487 @@
-/*....By : Robinson Mann
- *..Date : 2/3/2015
- *.About : Handles the foodservices/* api endpoints
- **********************/
+﻿// Copyright (c) Robinson Mann
+// Licensed under the MIT License, See LICENSE.txt for more information.
 
 using System.Collections.Generic;
-using System.IO;
 using Newtonsoft.Json;
-using UWaterlooApi.ApiRequest;
 
-namespace UWaterlooApi.FoodServices
+namespace uWaterlooApi.FoodServices
 {
 
-	public class Date
+	/// <summary> "Food Services Menu Announcements" (Official Documentation) </summary> 
+	public class FoodServicesMenuAnnouncements
 	{
-		public int? Week { get; set; }
-		public int? Year { get; set; }
-		public string Start { get; set; }
-		public string End { get; set; }
+		/// <summary> "Advertisement date object" (Official Documentation) </summary> 
+		public object Date { get; set; }
+
+		/// <summary> "Advertisement text" (Official Documentation) </summary> 
+		[JsonProperty("ad_text")]
+		public string AdText { get; set; }
 	}
 
-	public class Outlet
+	/// <summary> Menu </summary>
+	public class Menu
 	{
-		[JsonProperty("Outlet_Name")]
-		public string OutletName { get; set; }
-		[JsonProperty("Outlet_Id")]
-		public int? OutletId { get; set; }
-		public IEnumerable<OutletMenu> Menu { get; set; }
-		public string Notes { get; set; }
-	}
-
-	public class OutletMenu
-	{
+		/// <summary> "Advertisement date object" (Official Documentation) </summary> 
 		public string Date { get; set; }
+
+		/// <summary> "Advertisement date object" (Official Documentation) </summary> 
 		public string Day { get; set; }
+
+		/// <summary> "Advertisement date object" (Official Documentation) </summary>
 		public Meals Meals { get; set; }
+
+		/// <summary> "Advertisement date object" (Official Documentation) </summary>
 		public string Notes { get; set; }
 	}
 
+	/// <summary> Meals </summary> 
 	public class Meals
 	{
+		/// <summary> "Lunch menu items" (Official Documentation) </summary>
 		public IEnumerable<Meal> Lunch { get; set; }
+
+		/// <summary> "Dinner menu" (Official Documentation) </summary>
 		public IEnumerable<Meal> Dinner { get; set; }
 	}
 
+	/// <summary> A Meal </summary>
 	public class Meal
 	{
+		/// <summary> "Food item name" (Official Documentation) </summary>
 		[JsonProperty("Product_Name")]
 		public string ProductName { get; set; }
+
+		/// <summary> "Type of Diet" (Official Documentation) </summary> 
 		[JsonProperty("Diet_Type")]
 		public string DietType { get; set; }
+
+		/// <summary> "Food item ID" (Official Documentation) </summary>
 		[JsonProperty("Product_Id")]
 		public string ProductId { get; set; }
 	}
 
-	public class WeeklyFoodMenu
+	/// <summary> "lunch" (Official Documentation) </summary> 
+	public class Lunch
 	{
-		public Date Date { get; set; }
+		/// <summary> "Food item name" (Official Documentation) </summary> 
+		[JsonProperty("product_name")]
+		public string ProductName { get; set; }
 
-		public IEnumerable<Outlet> Outlets;
-	}
-
-	public class NoteComplete
-	{
-		public Date Date { get; set; }
-		public string OutletName { get; set; }
-		public int OutletId { get; set; }
-		public string Note { get; set; }
-	}
-
-
-	public class Diet
-	{
-		[JsonProperty("Diet_Id")]
-		public int? DietId { get; set; }
-
-		[JsonProperty("Diet_Type")]
+		/// <summary> "Type of diet" (Official Documentation) </summary> 
+		[JsonProperty("diet_type")]
 		public string DietType { get; set; }
 
+		/// <summary> "Food item ID" (Official Documentation) </summary> 
+		[JsonProperty("product_id")]
+		public int ProductId { get; set; }
 	}
 
-	public class OutletMore
+	/// <summary> "Food Services Diets" (Official Documentation) </summary> 
+	public class FoodServicesDiets
 	{
-		[JsonProperty("Outlet_Id")]
-		public int? OutletId { get; set; }
-		[JsonProperty("Outlet_Name")]
-		public string OutletName { get; set; }
-		[JsonProperty("Has_Breakfast")]
-		public bool? HasBreakfast { get; set; }
-		[JsonProperty("Has_Lunch")]
-		public bool? HasLunch { get; set; }
-		[JsonProperty("Has_Dinner")]
-		public bool? HasDinner { get; set; }
+		/// <summary> "Diet ID number" (Official Documentation) </summary> 
+		[JsonProperty("diet_id")]
+		public int DietId { get; set; }
+
+		/// <summary> "Diet type" (Official Documentation) </summary> 
+		[JsonProperty("diet_type")]
+		public string DietType { get; set; }
 	}
 
-	public class OutletsMore
-	{
-		public IEnumerable<OutletMore> Outlets;
-	}
-
-	/// <summary> Information about an outlet and its operating hours </summary>
-	public class Location
-	{
-
-		/// <summary> "Outlet ID number (not always same as outlets.json method). Can be null" (Offical Documentation) </summary>
-		[JsonProperty("Outlet_id")]
-		public int OutletId { get; set; }
-
-		/// <summary> "Outlet name" (Offical Documentation) </summary>
-		[JsonProperty("Outlet_name")]
-		public string OutletName { get; set; }
-
-		/// <summary> "Name of the building the outlet is located" (Offical Documentation) </summary>
-		public string Building { get; set; }
-
-		/// <summary> "URL of the outlet logo (size varies)" (Offical Documentation) </summary>
-		public string Logo { get; set; }
-
-		/// <summary> "Location latitude coordinate" (Offical Documentation) </summary>
-		public float Latitude { get; set; }
-
-		/// <summary> "Location longitude coordinate" (Offical Documentation) </summary>
-		public float Longitude { get; set; }
-
-		/// <summary> "Location blurb" (Offical Documentation) </summary>
-		public string Description { get; set; }
-
-		/// <summary> "Outlet-specific announcement" (Offical Documentation) </summary>
-		public string Notice { get; set; }
-
-		/// <summary> "Predicts if the location is currently open by taking the current time into account" (Offical Documentation) </summary>
-		[JsonProperty("Is_Open_Now")]
-		public bool IsOpenNow { get; set; }
-
-		/// <summary> "Weekly operating hours data" (Offical Documentation) </summary>
-		[JsonProperty("Opening_Hours")]
-		public IEnumerable<LocationOpeningHours> OpeningHours { get; set; }
-
-		/// <summary> "Special cases for operating hours" (Offical Documentation) </summary>
-		[JsonProperty("Special_Hours")]
-		public IEnumerable<LocationOpeningHours> SpecialHours { get; set; }
-
-		/// <summary> "Y-m-d format list of dates the outlet is closed" (Offical Documentation) </summary>
-		[JsonProperty("Dates_Closed")]
-		public IEnumerable<string> DatesClosed { get; set; } 
-
-
-	}	
-
-	/// <summary> "Weekly operating hours data"  (Official Documentation) </summary>
-	public class LocationOpeningHours
-	{
-		public LocationDayOfWeekOpeningHours Sunday { get; set; }
-		public LocationDayOfWeekOpeningHours Monday { get; set; }
-		public LocationDayOfWeekOpeningHours Tuesday { get; set; }
-		public LocationDayOfWeekOpeningHours Wednesday { get; set; }
-		public LocationDayOfWeekOpeningHours Thursday { get; set; }
-		public LocationDayOfWeekOpeningHours Friday { get; set; }
-		public LocationDayOfWeekOpeningHours Saturday { get; set; }
-	}
-
-	/// <summary> Hours for a particular day of the week </summary>
-	public class LocationDayOfWeekOpeningHours
-	{
-		/// <summary> "Location's opening time (H:i format)" (Offical Documentation) </summary>
-		[JsonProperty("Opening_Hour")]
-		public string OpeningHour { get; set; }
-
-		/// <summary> "Location's closing time (H:i format)" (Offical Documentation) </summary>
-		[JsonProperty("Closing_Hour")]
-		public string ClosingHour { get; set; }
-
-		/// <summary> "If the location is closed on that day" (Offical Documentation) </summary>
-		[JsonProperty("Is_Closed")]
-		public bool IsClosed { get; set; }
-	}
-
-	/// <summary> "Special cases for operating hours" (Offical Documentation) </summary>
+	/// <summary> "special_hours" (Official Documentation) </summary> 
 	public class SpecialHours
 	{
-
-		///<summary> "Y-m-d format date for the special case" (Offical Documentation) </summary>
+		/// <summary> "Y-m-d format date for the special case" (Official Documentation) </summary> 
 		public string Date { get; set; }
 
-		///<summary> "Location's opening time (H:i format)" (Offical Documentation) </summary>
+		/// <summary> "Location's opening time (H:i format)" (Official Documentation) </summary> 
 		[JsonProperty("opening_hour")]
 		public string OpeningHour { get; set; }
 
-		///<summary> "Location's closing time (H:i format)" (Offical Documentation) </summary>
+		/// <summary> "Location's closing time (H:i format)" (Official Documentation) </summary> 
 		[JsonProperty("closing_hour")]
 		public string ClosingHour { get; set; }
 	}
 
-	public class Watcard
+	/// <summary> "Food Services Locations and Hours" (Official Documentation) </summary> 
+	public class FoodServicesLocationsAndHours
 	{
-		/// <summary> "Outlet ID number" (Offical Documentation) </summary>
-		[JsonProperty("vender_id")]
+		/// <summary> "Outlet ID number (not always same as outlets.json method). Can be null" (Official Documentation) </summary> 
+		[JsonProperty("outlet_id")]
+		public int OutletId { get; set; }
+
+		/// <summary> "Outlet name" (Official Documentation) </summary> 
+		[JsonProperty("outlet_name")]
+		public string OutletName { get; set; }
+
+		/// <summary> "Name of the building the outlet is located" (Official Documentation) </summary> 
+		public string Building { get; set; }
+
+		/// <summary> "URL of the outlet logo (size varies)" (Official Documentation) </summary> 
+		public string Logo { get; set; }
+
+		/// <summary> "Location latitude coordinate" (Official Documentation) </summary> 
+		public double Latitude { get; set; }
+
+		/// <summary> "Location longitude coordinate" (Official Documentation) </summary> 
+		public double Longitude { get; set; }
+
+		/// <summary> "Location blurb" (Official Documentation) </summary> 
+		public string Description { get; set; }
+
+		/// <summary> "Outlet-specific announcements" (Official Documentation) </summary> 
+		public string Notice { get; set; }
+
+		/// <summary> "Predicts if the location is currently open by taking the current time into account" (Official Documentation) </summary> 
+		[JsonProperty("is_open_now")]
+		public bool IsOpenNow { get; set; }
+
+		/// <summary> "Weekly operating hours data" (Official Documentation) </summary> 
+		[JsonProperty("opening_hours")]
+		public object OpeningHours { get; set; }
+
+		/// <summary> "Special cases for operating hours" (Official Documentation) </summary> 
+		[JsonProperty("special_hours")]
+		public IEnumerable<SpecialHours> SpecialHours { get; set; }
+
+		/// <summary> "Y-m-d format list of dates the outlet is closed" (Official Documentation) </summary> 
+		[JsonProperty("dates_closed")]
+		public IEnumerable<string> DatesClosed { get; set; }
+	}
+
+	/// <summary> "Food Services Menu Notes" (Official Documentation) </summary> 
+	public class FoodServicesMenuNotes
+	{
+		/// <summary> "Menu date object" (Official Documentation) </summary> 
+		public object Date { get; set; }
+
+		/// <summary> "Outlet name as per /foodservices/outlets" (Official Documentation) </summary> 
+		[JsonProperty("outlet_name")]
+		public string OutletName { get; set; }
+
+		/// <summary> "Outlet ID as per /foodservices/outlets" (Official Documentation) </summary> 
+		[JsonProperty("outlet_id")]
+		public int OutletId { get; set; }
+
+		/// <summary> "Note" (Official Documentation) </summary> 
+		public object Note { get; set; }
+	}
+
+	/// <summary> "Food Services Outlets" (Official Documentation) </summary> 
+	public class FoodServicesOutlets
+	{
+		/// <summary> "Outlet ID number" (Official Documentation) </summary> 
+		[JsonProperty("outlet_id")]
+		public int OutletId { get; set; }
+
+		/// <summary> "Outlet name" (Official Documentation) </summary> 
+		[JsonProperty("outlet_name")]
+		public string OutletName { get; set; }
+
+		/// <summary> "If serves breakfast" (Official Documentation) </summary> 
+		[JsonProperty("has_breakfast")]
+		public bool HasBreakfast { get; set; }
+
+		/// <summary> "If serves lunch" (Official Documentation) </summary> 
+		[JsonProperty("has_lunch")]
+		public bool HasLunch { get; set; }
+
+		/// <summary> "If serves dinner" (Official Documentation) </summary> 
+		[JsonProperty("has_dinner")]
+		public bool HasDinner { get; set; }
+	}
+
+	/// <summary> "FoodServices Product Details" (Official Documentation) </summary> 
+	public class FoodServicesProductDetails
+	{
+		/// <summary> "Food item's numeric id" (Official Documentation) </summary> 
+		[JsonProperty("product_id")]
+		public int ProductId { get; set; }
+
+		/// <summary> "Name of the food item" (Official Documentation) </summary> 
+		[JsonProperty("product_name")]
+		public string ProductName { get; set; }
+
+		/// <summary> "Food ingredients" (Official Documentation) </summary> 
+		public string Ingredients { get; set; }
+
+		/// <summary> "Item's service size (in grams or whole)" (Official Documentation) </summary> 
+		[JsonProperty("serving_size")]
+		public string ServingSize { get; set; }
+
+		/// <summary> "Serving size in milliliters" (Official Documentation) </summary> 
+		[JsonProperty("serving_size_ml")]
+		public int ServingSizeMl { get; set; }
+
+		/// <summary> "Serving size in grams" (Official Documentation) </summary> 
+		[JsonProperty("serving_size_g")]
+		public int ServingSizeG { get; set; }
+
+		/// <summary> "Food calorie count" (Official Documentation) </summary> 
+		public int Calories { get; set; }
+
+		/// <summary> "Total fat in grams" (Official Documentation) </summary> 
+		[JsonProperty("total_fat_g")]
+		public int TotalFatG { get; set; }
+
+		/// <summary> "Total fat in percentage" (Official Documentation) </summary> 
+		[JsonProperty("total_fat_percent")]
+		public int TotalFatPercent { get; set; }
+
+		/// <summary> "Total saturated fat in grams" (Official Documentation) </summary> 
+		[JsonProperty("fat_saturated_g")]
+		public int FatSaturatedG { get; set; }
+
+		/// <summary> "Total saturated fat in percentage" (Official Documentation) </summary> 
+		[JsonProperty("fat_saturated_percent")]
+		public int FatSaturatedPercent { get; set; }
+
+		/// <summary> "Total trans fat in grams" (Official Documentation) </summary> 
+		[JsonProperty("fat_trans_g")]
+		public int FatTransG { get; set; }
+
+		/// <summary> "Total trans fat in percentage" (Official Documentation) </summary> 
+		[JsonProperty("fat_trans_percent")]
+		public int FatTransPercent { get; set; }
+
+		/// <summary> "Total cholesterol in milligrams" (Official Documentation) </summary> 
+		[JsonProperty("cholesterol_mg")]
+		public int CholesterolMg { get; set; }
+
+		/// <summary> "Sodium in milligrams" (Official Documentation) </summary> 
+		[JsonProperty("sodium_mg")]
+		public int SodiumMg { get; set; }
+
+		/// <summary> "Sodium in percentage" (Official Documentation) </summary> 
+		[JsonProperty("sodium_percent")]
+		public int SodiumPercent { get; set; }
+
+		/// <summary> "Total carbohydrates in grams" (Official Documentation) </summary> 
+		[JsonProperty("carbo_g")]
+		public int CarboG { get; set; }
+
+		/// <summary> "Carbohydrates as percentage" (Official Documentation) </summary> 
+		[JsonProperty("carbo_percent")]
+		public int CarboPercent { get; set; }
+
+		/// <summary> "Carbohydrate fibres in grams" (Official Documentation) </summary> 
+		[JsonProperty("carbo_fibre_g")]
+		public int CarboFibreG { get; set; }
+
+		/// <summary> "Carbohydrates fibers as percentage" (Official Documentation) </summary> 
+		[JsonProperty("carbo_fibre_percent")]
+		public int CarboFibrePercent { get; set; }
+
+		/// <summary> "Carbohydrate sugar in grams" (Official Documentation) </summary> 
+		[JsonProperty("carbo_sugars_g")]
+		public int CarboSugarsG { get; set; }
+
+		/// <summary> "Total protein in grams" (Official Documentation) </summary> 
+		[JsonProperty("protein_g")]
+		public int ProteinG { get; set; }
+
+		/// <summary> "Total vitamin A percentage" (Official Documentation) </summary> 
+		[JsonProperty("vitamin_a_percent")]
+		public int VitaminAPercent { get; set; }
+
+		/// <summary> "Total vitamin C percentage" (Official Documentation) </summary> 
+		[JsonProperty("vitamin_c_percent")]
+		public int VitaminCPercent { get; set; }
+
+		/// <summary> "Total calcium percentage" (Official Documentation) </summary> 
+		[JsonProperty("calcium_percent")]
+		public int CalciumPercent { get; set; }
+
+		/// <summary> "Total iron percentage" (Official Documentation) </summary> 
+		[JsonProperty("iron_percent")]
+		public int IronPercent { get; set; }
+
+		/// <summary> "Micro nutrients in item" (Official Documentation) </summary> 
+		[JsonProperty("micro_nutrients")]
+		public string MicroNutrients { get; set; }
+
+		/// <summary> "Any eating tips for the item" (Official Documentation) </summary> 
+		public string Tips { get; set; }
+
+		/// <summary> "Foodservices given diet id" (Official Documentation) </summary> 
+		[JsonProperty("diet_id")]
+		public int DietId { get; set; }
+
+		/// <summary> "String representation of the diet_id" (Official Documentation) </summary> 
+		[JsonProperty("diet_type")]
+		public string DietType { get; set; }
+	}
+
+	/// <summary> "List of all WatCard locations" (Official Documentation) </summary> 
+	public class ListOfAllWatCardLocations
+	{
+		/// <summary> "Outlet ID number" (Official Documentation) </summary> 
+		[JsonProperty("vendor_id")]
 		public int VendorId { get; set; }
 
-		/// <summary> "Vendor name" (Offical Documentation) </summary>
+		/// <summary> "Vendor name" (Official Documentation) </summary> 
 		[JsonProperty("vendor_name")]
 		public string VendorName { get; set; }
 	}
 
-	public class Announcements
+	/// <summary> "outlets" (Official Documentation) </summary> 
+	public class Outlets
 	{
-		/// <summary> "Advertisement date object" (Offical Documentation) </summary> 
-		public string Date { get; set; }
+		/// <summary> "Name of the outlet" (Official Documentation) </summary> 
+		[JsonProperty("outlet_name")]
+		public string OutletName { get; set; }
 
-		/// <summary> "Advertisement text" (Offical Documentation) </summary> 
-		[JsonProperty("ad_text")] 
-		public string AdText { get; set; }
+		/// <summary> "Foodservices ID for the outlet" (Official Documentation) </summary> 
+		[JsonProperty("outlet_id")]
+		public int OutletId { get; set; }
+
+		/// <summary> "The outlet menu list" (Official Documentation) </summary> 
+		public IEnumerable<Menu> Menu { get; set; }
 	}
 
-	public class Product
+	/// <summary> "Weekly Food Menu" (Official Documentation) </summary> 
+	public class WeeklyFoodMenu
 	{
-		/// <summary> "Food item's numeric id" (Offical Documentation) </summary>
-		public int Product_Id { get; set; }
+		/// <summary> "Menu date object" (Official Documentation) </summary> 
+		public object Date { get; set; }
 
-		/// <summary> "Name of the food item" (Offical Documentation) </summary>
-		public string Product_Name { get; set; }
-
-		/// <summary> "Food ingredients" (Offical Documentation) </summary>
-		public string Ingredients { get; set; }
-
-		/// <summary> "Item's service size (in grams or whole)" (Offical Documentation) </summary>
-		public string Serving_Size { get; set; }
-
-		/// <summary> "Serving size in milliliters" (Offical Documentation) </summary>
-		public int Serving_Size_ml { get; set; }
-
-		/// <summary> "Serving size in grams" (Offical Documentation) </summary>
-		public int Serving_Size_g { get; set; }
-
-		/// <summary> "Food calorie count" (Offical Documentation) </summary>
-		public int Calories { get; set; }
-
-		/// <summary> "Total fat in grams" (Offical Documentation) </summary>
-		public int Total_Fat_g { get; set; }
-
-		/// <summary> "Total fat in percentage" (Offical Documentation) </summary>
-		public int Total_Fat_Percent { get; set; }
-
-		/// <summary> "Total saturated fat in grams" (Offical Documentation) </summary>
-		public int Fat_Saturated_g { get; set; }
-
-		/// <summary> "Total saturated fat in percentage" (Offical Documentation) </summary>
-		public int Fat_Saturated_Percent { get; set; }
-
-		/// <summary> "Total trans fat in grams" (Offical Documentation) </summary>
-		public int Fat_Trans_g { get; set; }
-
-		/// <summary> "Total trans fat in percentage" (Offical Documentation) </summary>
-		public int Fat_Trans_Percent { get; set; }
-
-		/// <summary> "Total cholesterol in milligrams" (Offical Documentation) </summary>
-		public int Cholesterol_mg { get; set; }
-
-		/// <summary> "Sodium in milligrams" (Offical Documentation) </summary>
-		public int Sodium_mg { get; set; }
-
-		/// <summary> "Sodium in percentage" (Offical Documentation) </summary>
-		public int Sodium_Percent { get; set; }
-
-		/// <summary> "Total carbohydrates in grams" (Offical Documentation) </summary>
-		public int Carbo_g { get; set; }
-
-		/// <summary> "Carbohydrates as percentage" (Offical Documentation) </summary>
-		public int Carbo_Percent { get; set; }
-
-		/// <summary> "Carbohydrate fibres in grams" (Offical Documentation) </summary>
-		public int Carbo_Fibre_g { get; set; }
-
-		/// <summary> "Carbohydrates fibers as percentage" (Offical Documentation) </summary>
-		public int Carbo_Fibre_Percent { get; set; }
-
-		/// <summary> "Carbohydrate sugar in grams" (Offical Documentation) </summary>
-		public int Carbo_Sugars_g { get; set; }
-
-		/// <summary> "Total protein in grams" (Offical Documentation) </summary>
-		public int Protein_g { get; set; }
-
-		/// <summary> "Total vitamin A percentage" (Offical Documentation) </summary>
-		public int Vitamin_A_Percent { get; set; }
-
-		/// <summary> "Total vitamin C percentage" (Offical Documentation) </summary>
-		public int Vitamin_C_Percent { get; set; }
-
-		/// <summary> "Total calcium percentage" (Offical Documentation) </summary>
-		public int Calcium_Percent { get; set; }
-
-		/// <summary> "Total iron percentage" (Offical Documentation) </summary>
-		public int Iron_Percent { get; set; }
-
-		/// <summary> "Micro nutrients in item" (Offical Documentation) </summary>
-		public string Micro_Nutrients { get; set; }
-
-		/// <summary> "Any eating tips for the item" (Offical Documentation) </summary>
-		public string Tips { get; set; }
-
-		/// <summary> "Foodservices given diet id" (Offical Documentation) </summary>
-		public int Diet_Id { get; set; }
-
-		/// <summary> "String representation of the diet_id" (Offical Documentation) </summary>
-		public string Diet_Type { get; set; }
-
+		/// <summary> "Available outlets" (Official Documentation) </summary> 
+		public IEnumerable<Outlets> Outlets { get; set; }
 	}
 
-	public class FoodServicesApiService
+	/// <summary> Foodservices Endpoints </summary> 
+	public class FoodServicesApi
 	{
+
 		// The Users University of Waterloo Open Data API Key
 		private readonly string _apiKey;
 
 		/// <summary> Default constructor </summary>
 		/// <param name="apiKey">University of Waterloo Open Data API Key</param>
-		public FoodServicesApiService(string apiKey)
+		public FoodServicesApi(string apiKey)
 		{
 			_apiKey = apiKey;
 		}
 
-		/// <summary> "This method returns current week's food menu" (Official Documentation) </summary>
-		public ApiRequest<WeeklyFoodMenu> Menu()
+		/// <summary>
+		/// Official Method Name: Food Services Menu Announcements
+		/// Description: This method returns additional announcements regarding food served in the current week
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
+		/// </summary>
+		public ApiRequest<List<FoodServicesMenuAnnouncements>> FoodServicesMenuAnnouncements()
 		{
-			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest("/foodservices/menu", _apiKey);
-		}
-		
-		/// <summary> "This method returns additional notes regarding food served in the current week" (Official Documentation) </summary>
-		public ApiRequest<List<NoteComplete>> Notes()
-		{
-			return ApiRequest<List<NoteComplete>>.CreateApiRequest("/foodservices/notes", _apiKey);
-		}
-
-		/// <summary> "This method returns a list of all diets" (Official Documentation) </summary>
-		public ApiRequest<List<Diet>> Diets()
-		{
-			return ApiRequest<List<Diet>>.CreateApiRequest("/foodservices/diets", _apiKey);
-		}
-
-		/// <summary> "This method returns a list of all outlets and their unique IDs, names and breakfast/lunch/dinner meal service indicators" (Official Documentation) </summary>
-		public ApiRequest<List<OutletMore>> Outlets()
-		{
-			return ApiRequest<List<OutletMore>>.CreateApiRequest("/foodservices/outlets", _apiKey);
-		}
-
-		/// <summary> "This method returns a list of all outlets and their operating hour data" (Offical Documentation) </summary>
-		public ApiRequest<List<Location>> Locations()
-		{
-			return ApiRequest<List<Location>>.CreateApiRequest("/foodservices/locations", _apiKey);
+			return ApiRequest<List<FoodServicesMenuAnnouncements>>.CreateApiRequest("/foodservices/announcements", _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Food Services Diets
+		/// Description: This method returns a list of all diets
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <returns></returns>
-		public ApiRequest<List<Watcard>> Watcard()
+		public ApiRequest<List<FoodServicesDiets>> FoodServicesDiets()
 		{
-			return ApiRequest<List<Watcard>>.CreateApiRequest("/foodservices/watcard", _apiKey);
+			return ApiRequest<List<FoodServicesDiets>>.CreateApiRequest("/foodservices/diets", _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Food Services Locations and Hours
+		/// Description: This method returns a list of all outlets and their operating hour data
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <returns></returns>
-		public ApiRequest<List<Announcements>> Announcements()
+		public ApiRequest<List<FoodServicesLocationsAndHours>> FoodServicesLocationsAndHours()
 		{
-			return ApiRequest<List<Announcements>>.CreateApiRequest("/foodservices/announcements", _apiKey);
+			return ApiRequest<List<FoodServicesLocationsAndHours>>.CreateApiRequest("/foodservices/locations", _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Weekly Food Menu
+		/// Description: This method returns current week's food menu.
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="product"></param>
-		/// <returns></returns>
-		public ApiRequest<List<Announcements>> Products(int product)
+		public ApiRequest<List<WeeklyFoodMenu>> WeeklyFoodMenu()
 		{
-			return ApiRequest<List<Announcements>>.CreateApiRequest("/foodservices/announcements", _apiKey);
+			return ApiRequest<List<WeeklyFoodMenu>>.CreateApiRequest("/foodservices/menu", _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Food Services Menu Notes
+		/// Description: This method returns additional notes regarding food served in the current week
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="year"></param>
-		/// <param name="week"></param>
-		/// <returns></returns>
-		public ApiRequest<WeeklyFoodMenu> Menu(int year, int week)
+		public ApiRequest<List<FoodServicesMenuNotes>> FoodServicesMenuNotes()
 		{
-			if (year < 0 || week <0)
-				throw new InvalidDataException();
-
-			// Generates the appropriate endpoint url
-			var request = string.Format("/foodservices/{0}/{1}/menu", year, week);
-
-			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest(request, _apiKey);
+			return ApiRequest<List<FoodServicesMenuNotes>>.CreateApiRequest("/foodservices/notes", _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: Food Services Outlets
+		/// Description: This method returns a list of all outlets and their unique IDs, names and breakfast/lunch/dinner meal service indicators
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="year"></param>
-		/// <param name="week"></param>
-		/// <returns></returns>
-		public ApiRequest<List<NoteComplete>> Notes(int year, int week)
+		public ApiRequest<List<FoodServicesOutlets>> FoodServicesOutlets()
 		{
-			if (year < 0 || week < 0)
-				throw new InvalidDataException();
-
-			// Generates the appropriate endpoint url
-			var request = string.Format("/foodservices/{0}/{1}/notes", year, week);
-
-			return ApiRequest<List<NoteComplete>>.CreateApiRequest(request, _apiKey);
+			return ApiRequest<List<FoodServicesOutlets>>.CreateApiRequest("/foodservices/outlets", _apiKey);
 		}
 
 		/// <summary>
-		/// todo
+		/// Official Method Name: FoodServices Product Details
+		/// Description: This method returns a product's nutritional information
+		/// Update Frequency: On request (lib)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <param name="year"></param>
-		/// <param name="week"></param>
-		/// <returns></returns>
-		public ApiRequest<List<Announcements>> Announcements(int year, int week)
+		public ApiRequest<List<FoodServicesProductDetails>> FoodServicesProductDetails(int productId)
 		{
-			if (year < 0 || week < 0)
-				throw new InvalidDataException();
+			return ApiRequest<List<FoodServicesProductDetails>>.CreateApiRequest(string.Format("/foodservices/products/{0}", productId), _apiKey);
+		}
 
-			// Generates the appropriate endpoint url
-			var request = string.Format("/foodservices/{0}/{1}/announcements", year, week);
+		/// <summary>
+		/// Official Method Name: List of all WatCard locations
+		/// Description: This method returns a list of all WatCard locations according to Food Services
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
+		/// </summary>
+		public ApiRequest<List<ListOfAllWatCardLocations>> ListOfAllWatCardLocations()
+		{
+			return ApiRequest<List<ListOfAllWatCardLocations>>.CreateApiRequest("/foodservices/watcard", _apiKey);
+		}
 
-			return ApiRequest<List<Announcements>>.CreateApiRequest(request, _apiKey);
+		/// <summary>
+		/// Official Method Name: Food Services Menu Announcements Filtered by Week
+		/// Description: This method returns additional announcements regarding food served in the week specified
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
+		/// </summary>
+		public ApiRequest<List<FoodServicesMenuAnnouncements>> FoodServicesMenuAnnouncements(int year, int week)
+		{
+			return ApiRequest<List<FoodServicesMenuAnnouncements>>.CreateApiRequest(string.Format("/foodservices/{0}/{1}/announcements", year, week), _apiKey);
+		}
+
+		/// <summary>
+		/// Official Method Name: Weekly Food Menu
+		/// Description: This method returns the given week and year's food menu.
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
+		/// </summary>
+		public ApiRequest<WeeklyFoodMenu> WeeklyFoodMenu(int year, int week)
+		{
+			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest(string.Format("/foodservices/{0}/{1}/menu", year, week), _apiKey);
+		}
+
+		/// <summary>
+		/// Official Method Name: Food Services Menu Notes Filtered by Week
+		/// Description: This method returns additional notes regarding food served in the week specified
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
+		/// </summary>
+		public ApiRequest<List<FoodServicesMenuNotes>> FoodServicesMenuNotes(int year, int week)
+		{
+			return ApiRequest<List<FoodServicesMenuNotes>>.CreateApiRequest(string.Format("/foodservices/{0}/{1}/notes", year, week), _apiKey);
 		}
 
 	}

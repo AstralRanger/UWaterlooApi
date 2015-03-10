@@ -1,23 +1,26 @@
+﻿// Copyright (c) Robinson Mann
+// Licensed under the MIT License, See LICENSE.txt for more information.
+
 using System.Net;
 using Newtonsoft.Json;
-using UWaterlooApi.FoodServices;
-using UWaterlooApi.Courses;
-using UWaterlooApi.Events;
-using UWaterlooApi.News;
-using UWaterlooApi.Weather;
-using UWaterlooApi.Terms;
-using UWaterlooApi.Resources;
-using UWaterlooApi.DefinitionsAndCodes;
-using UWaterlooApi.Buildings;
-using UWaterlooApi.Api;
-using UWaterlooApi.Server;
+using uWaterlooApi.Api;
+using uWaterlooApi.Buildings;
+using uWaterlooApi.Courses;
+using uWaterlooApi.DefinitionsAndCodes;
+using uWaterlooApi.Events;
+using uWaterlooApi.FoodServices;
+using uWaterlooApi.News;
+using uWaterlooApi.Resources;
+using uWaterlooApi.Server;
+using uWaterlooApi.Terms;
+using uWaterlooApi.Weather;
 
-namespace UWaterlooApi
+namespace uWaterlooApi
 {
 	/// <summary>
 	/// UWaterlooAPI Class
 	/// </summary>
-    public class UWaterlooApi
+    public class uWaterlooApi
     {
 		/// Api endpoints
 		public readonly FoodServicesApi FoodServices;
@@ -36,7 +39,7 @@ namespace UWaterlooApi
 		/// Default constructor 
 		/// </summary>
 		/// <param name="apiKey">UWaterloo API Key</param>
-		public UWaterlooApi(string apiKey) {
+		public uWaterlooApi(string apiKey) {
 
 			// Initializing endpoints
 			FoodServices = new FoodServicesApi(apiKey);

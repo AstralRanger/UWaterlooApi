@@ -1,11 +1,10 @@
-/* By Robinson Mann */
+﻿// Copyright (c) Robinson Mann
+// Licensed under the MIT License, See LICENSE.txt for more information.
 
-using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using UWaterlooApi.ApiRequest;
 
-namespace UWaterlooApi.Events
+namespace uWaterlooApi.Events
 {
 
 	/// <summary> "times" (Official Documentation)
@@ -192,8 +191,6 @@ namespace UWaterlooApi.Events
 		/// <param name="apiKey">University of Waterloo Open Data API Key</param>
 		public EventsApi(string apiKey)
 		{
-			Console.WriteLine("Woo");
-			Console.ReadKey();
 			_apiKey = apiKey;
 		}
 
@@ -227,7 +224,7 @@ namespace UWaterlooApi.Events
 		/// </summary>
 		public ApiRequest<List<GetEventsForSiteGivenId>> GetEventsForSiteGivenId(string site, string id)
 		{
-			return ApiRequest<List<GetEventsForSiteGivenId>>.CreateApiRequest(String.Format("events/{0}/{1}", site, id), _apiKey);
+			return ApiRequest<List<GetEventsForSiteGivenId>>.CreateApiRequest(string.Format("events/{0}/{1}", site, id), _apiKey);
 		}
 
 		/// <summary>
@@ -240,5 +237,11 @@ namespace UWaterlooApi.Events
 		{
 			return ApiRequest<List<AnnualHolidays>>.CreateApiRequest("/events/holidays", _apiKey);
 		}
+
+		public string Test()
+		{
+			return "test";
+		}
+
 	}
 }

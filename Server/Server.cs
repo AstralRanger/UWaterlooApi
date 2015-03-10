@@ -1,43 +1,43 @@
+﻿// Copyright (c) Robinson Mann
+// Licensed under the MIT License, See LICENSE.txt for more information.
+
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using UWaterlooApi.ApiRequest;
 
-namespace UWaterlooAPI.Server
+namespace uWaterlooApi.Server
 {
-	/// <summary>
-	/// Info about the current time
-	/// </summary>
-	public class Time
+
+	/// <summary> "Server Error Codes" (Official Documentation) </summary> 
+	public class ServerErrorCodes
 	{
-		/// <summary> "Current UNIX timestamp" (Offical Documentation) </summary>
+		/// <summary> "Numerical value of the Error code" (Official Documentation) </summary> 
+		public int Code { get; set; }
+
+		/// <summary> "Accompanying error message" (Official Documentation) </summary> 
+		public string Message { get; set; }
+	}
+
+	/// <summary> "Server Time" (Official Documentation) </summary> 
+	public class ServerTime
+	{
+		/// <summary> "Current UNIX timestamp" (Official Documentation) </summary> 
 		public int Timestamp { get; set; }
-		/// <summary> "ISO8601 compatible current server timestamp" (Offical Documentation) </summary>
-		[JsonProperty("datetime")]
+
+		/// <summary> "ISO8601 compatible current server timestamp" (Official Documentation) </summary> 
 		public string Datetime { get; set; }
-		/// <summary> "Current server timezone" (Offical Documentation) </summary>
-		[JsonProperty("timezone")]
+
+		/// <summary> "Current server timezone" (Official Documentation) </summary> 
 		public string Timezone { get; set; }
-		/// <summary> "UNIX timestamp of when the api call quota will reset" (Offical Documentation) </summary>
+
+		/// <summary> "UNIX timestamp of when the api call quota will reset" (Official Documentation) </summary> 
 		[JsonProperty("key_reset_time")]
 		public int KeyResetTime { get; set; }
 	}
 
-	/// <summary>
-	/// Status code
-	/// </summary>
-	public class InfoCode
-	{
-		///<summary> "Numerical value of the Error code" (Offical Documentation) </summary>
-		public int Code { get; set; }
-		///<summary> "Accompanying error message" (Offical Documentation) </summary>
-		public string Message { get; set; }
-	}
-
-	/// <summary>
-	/// Server API
-	/// </summary>
+	/// <summary> Server Endpoints </summary> 
 	public class ServerApi
 	{
+
 		// The Users University of Waterloo Open Data API Key
 		private readonly string _apiKey;
 
@@ -49,21 +49,26 @@ namespace UWaterlooAPI.Server
 		}
 
 		/// <summary>
-		/// "This method returns time information about the server" (Offical Documentation) 
+		/// Official Method Name: Server Error Codes
+		/// Description: This method returns a list of all possible API error codes
+		/// Update Frequency: Every request
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <returns></returns>
-		public ApiRequest<Time> Time()
+		public ApiRequest<List<ServerErrorCodes>> ServerErrorCodes()
 		{
-			return ApiRequest<Time>.CreateApiRequest("/server/codes", _apiKey);
+			return ApiRequest<List<ServerErrorCodes>>.CreateApiRequest("/server/codes", _apiKey);
 		}
 
 		/// <summary>
-		/// "This method returns a list of all possible API error codes" (Offical Documentation) 
+		/// Official Method Name: Server Time
+		/// Description: This method returns time information about the server
+		/// Update Frequency: Every request (live)
+		/// All the above information is from the Official Documentation
 		/// </summary>
-		/// <returns></returns>
-		public ApiRequest<List<InfoCode>> Codes()
+		public ApiRequest<List<ServerTime>> ServerTime()
 		{
-			return ApiRequest<List<InfoCode>>.CreateApiRequest("/server/codes", _apiKey);
+			return ApiRequest<List<ServerTime>>.CreateApiRequest("/server/time", _apiKey);
 		}
+
 	}
 }
