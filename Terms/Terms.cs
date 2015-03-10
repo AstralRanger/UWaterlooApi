@@ -2,9 +2,8 @@
 
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using UWaterlooApi.ApiRequest;
 
-namespace UWaterlooAPI.Terms
+namespace UWaterlooApi.Terms
 {
 
 	/// <summary> "Terms Listings" (Official Documentation) </summary> 
