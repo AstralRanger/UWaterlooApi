@@ -402,9 +402,9 @@ namespace uWaterlooApi.FoodServices
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<WeeklyFoodMenu>> WeeklyFoodMenu()
+		public ApiRequest<WeeklyFoodMenu> WeeklyFoodMenu()
 		{
-			return ApiRequest<List<WeeklyFoodMenu>>.CreateApiRequest("/foodservices/menu", _apiKey);
+			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest("/foodservices/menu", _apiKey);
 		}
 
 		/// <summary>
