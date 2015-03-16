@@ -1,11 +1,61 @@
-﻿// Copyright (c) Robinson Mann
-// Licensed under the MIT License, See LICENSE.txt for more information.
+﻿/* By Robinson Mann */
 
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace uWaterlooApi.Courses
+namespace UWaterlooApi.Courses
 {
+
+	/// <summary> "reserves" (Official Documentation) </summary> 
+	public class Reserves
+	{
+		/// <summary> "Name of the reserved group" (Official Documentation) </summary> 
+		[JsonProperty("reserve_group")]
+		public string ReserveGroup { get; set; }
+
+		/// <summary> "Total enrollment capacity of the group" (Official Documentation) </summary> 
+		[JsonProperty("enrollment_capacity")]
+		public int? EnrollmentCapacity { get; set; }
+
+		/// <summary> "Total reserve enrollment" (Official Documentation) </summary> 
+		[JsonProperty("enrollment_total")]
+		public int? EnrollmentTotal { get; set; }
+	}
+
+	/// <summary> "date" (Official Documentation) </summary> 
+	public class Date
+	{
+		/// <summary> "24 hour class starting time" (Official Documentation) </summary> 
+		[JsonProperty("start_time")]
+		public string StartTime { get; set; }
+
+		/// <summary> "24 hour class ending time" (Official Documentation) </summary> 
+		[JsonProperty("end_time")]
+		public string EndTime { get; set; }
+
+		/// <summary> "Weekdays the course is offered" (Official Documentation) </summary> 
+		public string Weekdays { get; set; }
+
+		/// <summary> "Additional starting date for course" (Official Documentation) </summary> 
+		[JsonProperty("start_date")]
+		public string StartDate { get; set; }
+
+		/// <summary> "Additional ending date for course" (Official Documentation) </summary> 
+		[JsonProperty("end_date")]
+		public string EndDate { get; set; }
+
+		/// <summary> "If the course schedule is TBA" (Official Documentation) </summary> 
+		[JsonProperty("is_tba")]
+		public bool? IsTba { get; set; }
+
+		/// <summary> "If the course is cancelled for the term" (Official Documentation) </summary> 
+		[JsonProperty("is_cancelled")]
+		public bool? IsCancelled { get; set; }
+
+		/// <summary> "If the course is closed for the term" (Official Documentation) </summary> 
+		[JsonProperty("is_closed")]
+		public bool? IsClosed { get; set; }
+	}
 
 	/// <summary> "Course Schedule by Class Number" (Official Documentation) </summary> 
 	public class CourseScheduleByClassNumber
@@ -18,7 +68,7 @@ namespace uWaterlooApi.Courses
 		public string CatalogNumber { get; set; }
 
 		/// <summary> "Credit count for the mentioned course" (Official Documentation) </summary> 
-		public double Units { get; set; }
+		public double? Units { get; set; }
 
 		/// <summary> "Class name and title" (Official Documentation) </summary> 
 		public string Title { get; set; }
@@ -28,7 +78,7 @@ namespace uWaterlooApi.Courses
 
 		/// <summary> "Associated term specific class enrollment number" (Official Documentation) </summary> 
 		[JsonProperty("class_number")]
-		public int ClassNumber { get; set; }
+		public int? ClassNumber { get; set; }
 
 		/// <summary> "Class instruction and number" (Official Documentation) </summary> 
 		public string Section { get; set; }
@@ -38,7 +88,7 @@ namespace uWaterlooApi.Courses
 
 		/// <summary> "Associated class id" (Official Documentation) </summary> 
 		[JsonProperty("associated_class")]
-		public int AssociatedClass { get; set; }
+		public int? AssociatedClass { get; set; }
 
 		/// <summary> "Name of the related course component" (Official Documentation) </summary> 
 		[JsonProperty("related_component_1")]
@@ -50,15 +100,15 @@ namespace uWaterlooApi.Courses
 
 		/// <summary> "Class enrollment capacity" (Official Documentation) </summary> 
 		[JsonProperty("enrollment_capacity")]
-		public int EnrollmentCapacity { get; set; }
+		public int? EnrollmentCapacity { get; set; }
 
 		/// <summary> "Total current class enrollment" (Official Documentation) </summary> 
 		[JsonProperty("enrollment_total")]
-		public int EnrollmentTotal { get; set; }
+		public int? EnrollmentTotal { get; set; }
 
 		/// <summary> "Class waiting capacity" (Official Documentation) </summary> 
 		[JsonProperty("waiting_capacity")]
-		public int WaitingCapacity { get; set; }
+		public int? WaitingCapacity { get; set; }
 
 		/// <summary> "Total current waiting students" (Official Documentation) </summary> 
 		[JsonProperty("waiting_total")]
@@ -68,17 +118,17 @@ namespace uWaterlooApi.Courses
 		public string Topic { get; set; }
 
 		/// <summary> "Course specific enrollment reservation data" (Official Documentation) </summary> 
-		public object Reserves { get; set; }
+		public IEnumerable<Reserves> Reserves { get; set; }
 
 		/// <summary> "Schedule data" (Official Documentation) </summary> 
-		public object Classes { get; set; }
+		public IEnumerable<Classes> Classes { get; set; }
 
 		/// <summary> "A list of classes the course is held with" (Official Documentation) </summary> 
 		[JsonProperty("held_with")]
-		public List<string> HeldWith { get; set; }
+		public IEnumerable<string> HeldWith { get; set; }
 
 		/// <summary> "4 digit term representation" (Official Documentation) </summary> 
-		public int Term { get; set; }
+		public int? Term { get; set; }
 
 		/// <summary> "Undergraduate or graduate course classification" (Official Documentation) </summary> 
 		[JsonProperty("academic_level")]
@@ -107,7 +157,7 @@ namespace uWaterlooApi.Courses
 		public string Title { get; set; }
 
 		/// <summary> "Credit count for the mentioned course" (Official Documentation) </summary> 
-		public double Units { get; set; }
+		public double? Units { get; set; }
 
 		/// <summary> "Brief course description" (Official Documentation) </summary> 
 		public string Description { get; set; }
@@ -135,15 +185,15 @@ namespace uWaterlooApi.Courses
 		public string Notes { get; set; }
 
 		/// <summary> "Brief course description" (Official Documentation) </summary> 
-		public object Offerings { get; set; }
+		public Offerings Offerings { get; set; }
 
 		/// <summary> "Does enrollment require the department's permission" (Official Documentation) </summary> 
 		[JsonProperty("needs_department_consent")]
-		public bool NeedsDepartmentConsent { get; set; }
+		public bool? NeedsDepartmentConsent { get; set; }
 
 		/// <summary> "Does enrollment require instructor's consent" (Official Documentation) </summary> 
 		[JsonProperty("needs_instructor_consent")]
-		public bool NeedsInstructorConsent { get; set; }
+		public bool? NeedsInstructorConsent { get; set; }
 
 		/// <summary> "Any additional information associated with the course" (Official Documentation) </summary> 
 		public List<string> Extra { get; set; }
@@ -178,7 +228,7 @@ namespace uWaterlooApi.Courses
 		public string Title { get; set; }
 
 		/// <summary> "Credit count for the mentioned course" (Official Documentation) </summary> 
-		public double Units { get; set; }
+		public double? Units { get; set; }
 
 		/// <summary> "Brief course description" (Official Documentation) </summary> 
 		public string Description { get; set; }
@@ -186,6 +236,40 @@ namespace uWaterlooApi.Courses
 		/// <summary> "Undergraduate or graduate course classification" (Official Documentation) </summary> 
 		[JsonProperty("academic_level")]
 		public string AcademicLevel { get; set; }
+	}
+
+	/// <summary> "offerings" (Official Documentation) </summary> 
+	public class Offerings
+	{
+		/// <summary> "Is the course offered online" (Official Documentation) </summary> 
+		public bool? Online { get; set; }
+
+		/// <summary> "Is the course only offered online" (Official Documentation) </summary> 
+		[JsonProperty("online_only")]
+		public bool? OnlineOnly { get; set; }
+
+		/// <summary> "Is the course offered at St. Jerome's" (Official Documentation) </summary> 
+		[JsonProperty("st_jerome")]
+		public bool? StJerome { get; set; }
+
+		/// <summary> "Is the course only offered at St. Jerome's" (Official Documentation) </summary> 
+		[JsonProperty("st_jerome_only")]
+		public bool? StJeromeOnly { get; set; }
+
+		/// <summary> "Is the course offered at Renison" (Official Documentation) </summary> 
+		public bool? Renison { get; set; }
+
+		/// <summary> "Is the course only offered at Renison" (Official Documentation) </summary> 
+		[JsonProperty("renison_only")]
+		public bool? RenisonOnly { get; set; }
+
+		/// <summary> "Is the course offered at Conrad Grebel" (Official Documentation) </summary> 
+		[JsonProperty("conrad_grebel")]
+		public bool? ConradGrebel { get; set; }
+
+		/// <summary> "Is the course only offered at Conrad Grebel" (Official Documentation) </summary> 
+		[JsonProperty("conrad_grebel_only")]
+		public bool? ConradGrebelOnly { get; set; }
 	}
 
 	/// <summary> "Course Information" (Official Documentation) </summary> 
@@ -206,7 +290,7 @@ namespace uWaterlooApi.Courses
 		public string Title { get; set; }
 
 		/// <summary> "Credit count for the mentioned course" (Official Documentation) </summary> 
-		public double Units { get; set; }
+		public double? Units { get; set; }
 
 		/// <summary> "Brief course description" (Official Documentation) </summary> 
 		public string Description { get; set; }
@@ -234,15 +318,15 @@ namespace uWaterlooApi.Courses
 		public string Notes { get; set; }
 
 		/// <summary> "Brief course description" (Official Documentation) </summary> 
-		public object Offerings { get; set; }
+		public Offerings Offerings { get; set; }
 
 		/// <summary> "Does enrollment require the department's permission" (Official Documentation) </summary> 
 		[JsonProperty("needs_department_consent")]
-		public bool NeedsDepartmentConsent { get; set; }
+		public bool? NeedsDepartmentConsent { get; set; }
 
 		/// <summary> "Does enrollment require instructor's consent" (Official Documentation) </summary> 
 		[JsonProperty("needs_instructor_consent")]
-		public bool NeedsInstructorConsent { get; set; }
+		public bool? NeedsInstructorConsent { get; set; }
 
 		/// <summary> "Any additional information associated with the course" (Official Documentation) </summary> 
 		public List<string> Extra { get; set; }
@@ -310,11 +394,34 @@ namespace uWaterlooApi.Courses
 		public string Title { get; set; }
 
 		/// <summary> "Raw listing of course prerequisites" (Official Documentation) </summary> 
-		public double Prerequisites { get; set; }
+		public string Prerequisites { get; set; }
 
 		/// <summary> "Parsed prerequisites" (Official Documentation) </summary> 
 		[JsonProperty("prerequisites_parsed")]
 		public List<string> PrerequisitesParsed { get; set; }
+	}
+
+	/// <summary> "location" (Official Documentation) </summary> 
+	public class Location
+	{
+		/// <summary> "Name of the building" (Official Documentation) </summary> 
+		public string Building { get; set; }
+
+		/// <summary> "Room double? from the building" (Official Documentation) </summary> 
+		public string Room { get; set; }
+	}
+
+	/// <summary> "classes" (Official Documentation) </summary> 
+	public class Classes
+	{
+		/// <summary> "Date object for course schedule" (Official Documentation) </summary> 
+		public Date Date { get; set; }
+
+		/// <summary> "Class location details" (Official Documentation) </summary> 
+		public Location Location { get; set; }
+
+		/// <summary> "Names of instructors teaching the course" (Official Documentation) </summary> 
+		public List<string> Instructors { get; set; }
 	}
 
 	/// <summary> "Course Schedule" (Official Documentation) </summary> 
@@ -328,7 +435,7 @@ namespace uWaterlooApi.Courses
 		public string CatalogNumber { get; set; }
 
 		/// <summary> "Credit count for the mentioned course" (Official Documentation) </summary> 
-		public double Units { get; set; }
+		public double? Units { get; set; }
 
 		/// <summary> "Class name and title" (Official Documentation) </summary> 
 		public string Title { get; set; }
@@ -338,7 +445,7 @@ namespace uWaterlooApi.Courses
 
 		/// <summary> "Associated term specific class enrollment number" (Official Documentation) </summary> 
 		[JsonProperty("class_number")]
-		public int ClassNumber { get; set; }
+		public int? ClassNumber { get; set; }
 
 		/// <summary> "Class instruction and number" (Official Documentation) </summary> 
 		public string Section { get; set; }
@@ -348,7 +455,7 @@ namespace uWaterlooApi.Courses
 
 		/// <summary> "Associated class id" (Official Documentation) </summary> 
 		[JsonProperty("associated_class")]
-		public int AssociatedClass { get; set; }
+		public int? AssociatedClass { get; set; }
 
 		/// <summary> "Name of the related course component" (Official Documentation) </summary> 
 		[JsonProperty("related_component_1")]
@@ -360,15 +467,15 @@ namespace uWaterlooApi.Courses
 
 		/// <summary> "Class enrollment capacity" (Official Documentation) </summary> 
 		[JsonProperty("enrollment_capacity")]
-		public int EnrollmentCapacity { get; set; }
+		public int? EnrollmentCapacity { get; set; }
 
 		/// <summary> "Total current class enrollment" (Official Documentation) </summary> 
 		[JsonProperty("enrollment_total")]
-		public int EnrollmentTotal { get; set; }
+		public int? EnrollmentTotal { get; set; }
 
 		/// <summary> "Class waiting capacity" (Official Documentation) </summary> 
 		[JsonProperty("waiting_capacity")]
-		public int WaitingCapacity { get; set; }
+		public int? WaitingCapacity { get; set; }
 
 		/// <summary> "Total current waiting students" (Official Documentation) </summary> 
 		[JsonProperty("waiting_total")]
@@ -378,17 +485,17 @@ namespace uWaterlooApi.Courses
 		public string Topic { get; set; }
 
 		/// <summary> "Course specific enrollment reservation data" (Official Documentation) </summary> 
-		public object Reserves { get; set; }
+		public IEnumerable<Reserves> Reserves { get; set; }
 
 		/// <summary> "Schedule data" (Official Documentation) </summary> 
-		public object Classes { get; set; }
+		public IEnumerable<Classes> Classes { get; set; }
 
 		/// <summary> "A list of classes the course is held with" (Official Documentation) </summary> 
 		[JsonProperty("held_with")]
-		public List<string> HeldWith { get; set; }
+		public IEnumerable<string> HeldWith { get; set; }
 
 		/// <summary> "4 digit term representation" (Official Documentation) </summary> 
-		public int Term { get; set; }
+		public int? Term { get; set; }
 
 		/// <summary> "Undergraduate or graduate course classification" (Official Documentation) </summary> 
 		[JsonProperty("academic_level")]
@@ -430,9 +537,9 @@ namespace uWaterlooApi.Courses
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<CourseInformationByCourseId>> CourseInformationByCourseId(int courseId)
+		public ApiRequest<CourseInformationByCourseId> CourseInformationByCourseId(int courseId)
 		{
-			return ApiRequest<List<CourseInformationByCourseId>>.CreateApiRequest(string.Format("/courses/{0}", courseId), _apiKey);
+			return ApiRequest<CourseInformationByCourseId>.CreateApiRequest(string.Format("/courses/{0}", courseId), _apiKey);
 		}
 
 		/// <summary>
@@ -452,9 +559,9 @@ namespace uWaterlooApi.Courses
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<CourseInformation>> CourseInformation(string subject, int catalogNumber)
+		public ApiRequest<CourseInformation> CourseInformation(string subject, int catalogNumber)
 		{
-			return ApiRequest<List<CourseInformation>>.CreateApiRequest(string.Format("/courses/{0}/{1}", subject, catalogNumber), _apiKey);
+			return ApiRequest<CourseInformation>.CreateApiRequest(string.Format("/courses/{0}/{1}", subject, catalogNumber), _apiKey);
 		}
 
 		/// <summary>
@@ -463,9 +570,9 @@ namespace uWaterlooApi.Courses
 		/// Update Frequency: Once a day
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<ExamSchedule>> ExamSchedule(string subject, int catalogNumber)
+		public ApiRequest<ExamSchedule> ExamSchedule(string subject, int catalogNumber)
 		{
-			return ApiRequest<List<ExamSchedule>>.CreateApiRequest(string.Format("/courses/{0}/{1}/examschedule", subject, catalogNumber), _apiKey);
+			return ApiRequest<ExamSchedule>.CreateApiRequest(string.Format("/courses/{0}/{1}/examschedule", subject, catalogNumber), _apiKey);
 		}
 
 		/// <summary>
@@ -474,9 +581,9 @@ namespace uWaterlooApi.Courses
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<CoursePrerequisites>> CoursePrerequisites(string subject, int catalogNumber)
+		public ApiRequest<CoursePrerequisites> CoursePrerequisites(string subject, int catalogNumber)
 		{
-			return ApiRequest<List<CoursePrerequisites>>.CreateApiRequest(string.Format("/courses/{0}/{1}/prerequisites", subject, catalogNumber), _apiKey);
+			return ApiRequest<CoursePrerequisites>.CreateApiRequest(string.Format("/courses/{0}/{1}/prerequisites", subject, catalogNumber), _apiKey);
 		}
 
 		/// <summary>
@@ -487,7 +594,7 @@ namespace uWaterlooApi.Courses
 		/// </summary>
 		public ApiRequest<List<CourseSchedule>> CourseSchedule(string subject, int catalogNumber)
 		{
-			return ApiRequest<List<CourseSchedule>>.CreateApiRequest(string.Format("/courses/{0}/ {1}/schedule", subject, catalogNumber), _apiKey);
+			return ApiRequest<List<CourseSchedule>>.CreateApiRequest(string.Format("/courses/{0}/{1}/schedule", subject, catalogNumber), _apiKey);
 		}
 
 	}

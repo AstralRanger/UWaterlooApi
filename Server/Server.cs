@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace uWaterlooApi.Server
+namespace UWaterlooApi.Server
 {
 
 	/// <summary> "Server Error Codes" (Official Documentation) </summary> 

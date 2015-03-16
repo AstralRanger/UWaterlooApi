@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace uWaterlooApi.DefinitionsAndCodes
+namespace UWaterlooApi.DefinitionsAndCodes
 {
 
 	/// <summary> "Code Lookups for Groups" (Official Documentation) </summary> 

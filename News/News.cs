@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace uWaterlooApi.News
+namespace UWaterlooApi.News
 {
 
 	/// <summary> "Get News from All Sites" (Official Documentation) </summary> 

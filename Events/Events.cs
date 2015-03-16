@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace uWaterlooApi.Events
+namespace UWaterlooApi.Events
 {
 
 	/// <summary> "times" (Official Documentation)

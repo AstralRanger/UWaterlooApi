@@ -3,26 +3,26 @@
 
 using System.Net;
 using Newtonsoft.Json;
-using uWaterlooApi.Api;
-using uWaterlooApi.Buildings;
-using uWaterlooApi.Courses;
-using uWaterlooApi.DefinitionsAndCodes;
-using uWaterlooApi.Events;
-using uWaterlooApi.FoodServices;
-using uWaterlooApi.News;
-using uWaterlooApi.Resources;
-using uWaterlooApi.Server;
-using uWaterlooApi.Terms;
-using uWaterlooApi.Weather;
+using UWaterlooApi.Api;
+using UWaterlooApi.Buildings;
+using UWaterlooApi.Courses;
+using UWaterlooApi.DefinitionsAndCodes;
+using UWaterlooApi.Events;
+using UWaterlooApi.FoodServices;
+using UWaterlooApi.News;
+using UWaterlooApi.Resources;
+using UWaterlooApi.Server;
+using UWaterlooApi.Terms;
+using UWaterlooApi.Weather;
 
-namespace uWaterlooApi
+namespace UWaterlooApi
 {
 	/// <summary>
 	/// UWaterlooAPI Class
 	/// </summary>
-    public class uWaterlooApi
+    public class UWaterlooApi
     {
-		/// Api endpoints
+		// Api endpoints
 		public readonly FoodServicesApi FoodServices;
 		public readonly CoursesApi Courses;
 		public readonly EventsApi Events;
@@ -39,7 +39,7 @@ namespace uWaterlooApi
 		/// Default constructor 
 		/// </summary>
 		/// <param name="apiKey">UWaterloo API Key</param>
-		public uWaterlooApi(string apiKey) {
+		public UWaterlooApi(string apiKey) {
 
 			// Initializing endpoints
 			FoodServices = new FoodServicesApi(apiKey);
@@ -62,7 +62,23 @@ namespace uWaterlooApi
 	/// </summary>
 	public class Meta
 	{
-		public int Requests, Timestamp, Status, MethodId, Version;
+		/// <summary> Number of requests the current API key has made in the current month  </summary>
+		public int Requests;
+
+		/// <summary> Unix timestamp </summary>
+		public int Timestamp;
+
+		/// <summary> Status code of API call </summary>
+		public int Status;
+
+		/// <summary></summary>
+		public int Version;
+
+		/// <summary> Method ID associated with endpoint </summary>
+		[JsonProperty("Method_Id")]
+		public int MethodId;
+
+		/// <summary> A string describing the status of the API call </summary>
 		public string Message;
 	}
 
@@ -72,7 +88,14 @@ namespace uWaterlooApi
 	/// <typeparam name="T"> Class corresponding to "data" in the APIs returned JSON feed </typeparam>
 	public class ApiRequest<T> where T : new()
 	{
+		/// <summary>
+		/// Meta data from API call
+		/// </summary>
 		public Meta Meta;
+
+		/// <summary>
+		/// Relevent data from API call
+		/// </summary>
 		public T Data;
 
 		/// <summary>

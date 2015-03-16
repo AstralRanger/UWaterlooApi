@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace uWaterlooApi.Resources
+namespace UWaterlooApi.Resources
 {
 
 	/// <summary> "List of geese nests" (Official Documentation) </summary> 

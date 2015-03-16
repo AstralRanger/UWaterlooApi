@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace uWaterlooApi.Buildings
+namespace UWaterlooApi.Buildings
 {
 
 	/// <summary> "building_sections" (Official Documentation) </summary> 

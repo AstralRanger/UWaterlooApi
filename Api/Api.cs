@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace uWaterlooApi.Api
+namespace UWaterlooApi.Api
 {
 
 	/// <summary> "API Changelog" (Official Documentation) </summary> 

@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace uWaterlooApi.Weather
+namespace UWaterlooApi.Weather
 {
 
 	/// <summary> "Current Weather" (Official Documentation) </summary> 

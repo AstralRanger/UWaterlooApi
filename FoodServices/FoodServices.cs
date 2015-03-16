@@ -4,33 +4,49 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace uWaterlooApi.FoodServices
+namespace UWaterlooApi.FoodServices
 {
 
 	/// <summary> "Food Services Menu Announcements" (Official Documentation) </summary> 
 	public class FoodServicesMenuAnnouncements
 	{
 		/// <summary> "Advertisement date object" (Official Documentation) </summary> 
-		public object Date { get; set; }
+		public string Date { get; set; }
 
 		/// <summary> "Advertisement text" (Official Documentation) </summary> 
 		[JsonProperty("ad_text")]
 		public string AdText { get; set; }
 	}
 
+	/// <summary> "Menu date object" (Official Documentation) </summary>
+	public class Date
+	{
+		/// <summary> "Requested week" (Official Documentation) </summary>
+		public int? Week { get; set; }
+
+		/// <summary> "Requested year" (Official Documentation) </summary>
+		public int? Year { get; set; }
+
+		/// <summary> "Starting day of the menu (Y-m-d)" (Official Documentation) </summary>
+		public string Start { get; set; }
+
+		/// <summary> "Ending day of the menu (Y-m-d)" (Official Documentation) </summary>
+		public string End { get; set; }
+	}
+
 	/// <summary> Menu </summary>
 	public class Menu
 	{
-		/// <summary> "Advertisement date object" (Official Documentation) </summary> 
+		/// <summary> "Date of the menu (Y-m-d)" (Official Documentation) </summary> 
 		public string Date { get; set; }
 
-		/// <summary> "Advertisement date object" (Official Documentation) </summary> 
+		/// <summary> "Day of the week" (Official Documentation) </summary> 
 		public string Day { get; set; }
 
-		/// <summary> "Advertisement date object" (Official Documentation) </summary>
+		/// <summary> "All the meals for the day" (Official Documentation) </summary>
 		public Meals Meals { get; set; }
 
-		/// <summary> "Advertisement date object" (Official Documentation) </summary>
+		/// <summary> "Additional announcements for the day" (Official Documentation) </summary>
 		public string Notes { get; set; }
 	}
 
@@ -73,7 +89,7 @@ namespace uWaterlooApi.FoodServices
 
 		/// <summary> "Food item ID" (Official Documentation) </summary> 
 		[JsonProperty("product_id")]
-		public int ProductId { get; set; }
+		public int? ProductId { get; set; }
 	}
 
 	/// <summary> "Food Services Diets" (Official Documentation) </summary> 
@@ -81,14 +97,53 @@ namespace uWaterlooApi.FoodServices
 	{
 		/// <summary> "Diet ID number" (Official Documentation) </summary> 
 		[JsonProperty("diet_id")]
-		public int DietId { get; set; }
+		public int? DietId { get; set; }
 
 		/// <summary> "Diet type" (Official Documentation) </summary> 
 		[JsonProperty("diet_type")]
 		public string DietType { get; set; }
 	}
 
-	/// <summary> "special_hours" (Official Documentation) </summary> 
+	/// <summary> "Weekly operating hours data" (Official Documentation) </summary>
+	public class OperatingHours
+	{
+		/// <summary> Operating hours for Monday </summary> 
+		public DailyOperatingHours Monday { get; set; }
+
+		/// <summary> Operating hours for Tuesday </summary> 
+		public DailyOperatingHours Tuesday { get; set; }
+		
+		/// <summary> Operating hours for Wednesday </summary> 
+		public DailyOperatingHours Wednesday { get; set; }
+		
+		/// <summary> Operating hours for Thursday </summary> 
+		public DailyOperatingHours Thursday { get; set; }
+		
+		/// <summary> Operating hours for Friday </summary> 
+		public DailyOperatingHours Friday { get; set; }
+		
+		/// <summary> Operating hours for Saturday </summary> 
+		public DailyOperatingHours Saturday { get; set; }
+		
+		/// <summary> Operating hours for Sunday </summary> 
+		public DailyOperatingHours Sunday { get; set; }
+	}
+
+	/// <summary> Operating hours for a specific date </summary>
+	public class DailyOperatingHours
+	{
+		/// <summary> "Location's opening time (H:i format)" (Official Documentation) </summary>
+		[JsonProperty("opening_hour")]
+		public string OpeningHour { get; set; }
+		/// <summary> "Location's closing time (H:i format)" (Official Documentation) </summary>
+		[JsonProperty("closing_hour")]
+		public string ClosingHour { get; set; }
+		/// <summary> "If the location is closed on that day" (Official Documentation) </summary>
+		[JsonProperty("is_closed")]
+		public bool? IsClosed { get; set; } 
+	}
+
+	/// <summary> "Special cases for operating hours" (Official Documentation) </summary> 
 	public class SpecialHours
 	{
 		/// <summary> "Y-m-d format date for the special case" (Official Documentation) </summary> 
@@ -108,7 +163,7 @@ namespace uWaterlooApi.FoodServices
 	{
 		/// <summary> "Outlet ID number (not always same as outlets.json method). Can be null" (Official Documentation) </summary> 
 		[JsonProperty("outlet_id")]
-		public int OutletId { get; set; }
+		public int? OutletId { get; set; }
 
 		/// <summary> "Outlet name" (Official Documentation) </summary> 
 		[JsonProperty("outlet_name")]
@@ -121,10 +176,10 @@ namespace uWaterlooApi.FoodServices
 		public string Logo { get; set; }
 
 		/// <summary> "Location latitude coordinate" (Official Documentation) </summary> 
-		public double Latitude { get; set; }
+		public double? Latitude { get; set; }
 
 		/// <summary> "Location longitude coordinate" (Official Documentation) </summary> 
-		public double Longitude { get; set; }
+		public double? Longitude { get; set; }
 
 		/// <summary> "Location blurb" (Official Documentation) </summary> 
 		public string Description { get; set; }
@@ -134,11 +189,11 @@ namespace uWaterlooApi.FoodServices
 
 		/// <summary> "Predicts if the location is currently open by taking the current time into account" (Official Documentation) </summary> 
 		[JsonProperty("is_open_now")]
-		public bool IsOpenNow { get; set; }
+		public bool? IsOpenNow { get; set; }
 
 		/// <summary> "Weekly operating hours data" (Official Documentation) </summary> 
 		[JsonProperty("opening_hours")]
-		public object OpeningHours { get; set; }
+		public DailyOperatingHours OpeningHours { get; set; }
 
 		/// <summary> "Special cases for operating hours" (Official Documentation) </summary> 
 		[JsonProperty("special_hours")]
@@ -153,7 +208,7 @@ namespace uWaterlooApi.FoodServices
 	public class FoodServicesMenuNotes
 	{
 		/// <summary> "Menu date object" (Official Documentation) </summary> 
-		public object Date { get; set; }
+		public string Date { get; set; }
 
 		/// <summary> "Outlet name as per /foodservices/outlets" (Official Documentation) </summary> 
 		[JsonProperty("outlet_name")]
@@ -161,10 +216,10 @@ namespace uWaterlooApi.FoodServices
 
 		/// <summary> "Outlet ID as per /foodservices/outlets" (Official Documentation) </summary> 
 		[JsonProperty("outlet_id")]
-		public int OutletId { get; set; }
+		public int? OutletId { get; set; }
 
 		/// <summary> "Note" (Official Documentation) </summary> 
-		public object Note { get; set; }
+		public string Note { get; set; }
 	}
 
 	/// <summary> "Food Services Outlets" (Official Documentation) </summary> 
@@ -172,7 +227,7 @@ namespace uWaterlooApi.FoodServices
 	{
 		/// <summary> "Outlet ID number" (Official Documentation) </summary> 
 		[JsonProperty("outlet_id")]
-		public int OutletId { get; set; }
+		public int? OutletId { get; set; }
 
 		/// <summary> "Outlet name" (Official Documentation) </summary> 
 		[JsonProperty("outlet_name")]
@@ -180,15 +235,15 @@ namespace uWaterlooApi.FoodServices
 
 		/// <summary> "If serves breakfast" (Official Documentation) </summary> 
 		[JsonProperty("has_breakfast")]
-		public bool HasBreakfast { get; set; }
+		public bool? HasBreakfast { get; set; }
 
 		/// <summary> "If serves lunch" (Official Documentation) </summary> 
 		[JsonProperty("has_lunch")]
-		public bool HasLunch { get; set; }
+		public bool? HasLunch { get; set; }
 
 		/// <summary> "If serves dinner" (Official Documentation) </summary> 
 		[JsonProperty("has_dinner")]
-		public bool HasDinner { get; set; }
+		public bool? HasDinner { get; set; }
 	}
 
 	/// <summary> "FoodServices Product Details" (Official Documentation) </summary> 
@@ -196,7 +251,7 @@ namespace uWaterlooApi.FoodServices
 	{
 		/// <summary> "Food item's numeric id" (Official Documentation) </summary> 
 		[JsonProperty("product_id")]
-		public int ProductId { get; set; }
+		public int? ProductId { get; set; }
 
 		/// <summary> "Name of the food item" (Official Documentation) </summary> 
 		[JsonProperty("product_name")]
@@ -211,90 +266,90 @@ namespace uWaterlooApi.FoodServices
 
 		/// <summary> "Serving size in milliliters" (Official Documentation) </summary> 
 		[JsonProperty("serving_size_ml")]
-		public int ServingSizeMl { get; set; }
+		public int? ServingSizeMl { get; set; }
 
 		/// <summary> "Serving size in grams" (Official Documentation) </summary> 
 		[JsonProperty("serving_size_g")]
-		public int ServingSizeG { get; set; }
+		public int? ServingSizeG { get; set; }
 
 		/// <summary> "Food calorie count" (Official Documentation) </summary> 
-		public int Calories { get; set; }
+		public int? Calories { get; set; }
 
 		/// <summary> "Total fat in grams" (Official Documentation) </summary> 
 		[JsonProperty("total_fat_g")]
-		public int TotalFatG { get; set; }
+		public int? TotalFatG { get; set; }
 
 		/// <summary> "Total fat in percentage" (Official Documentation) </summary> 
 		[JsonProperty("total_fat_percent")]
-		public int TotalFatPercent { get; set; }
+		public int? TotalFatPercent { get; set; }
 
 		/// <summary> "Total saturated fat in grams" (Official Documentation) </summary> 
 		[JsonProperty("fat_saturated_g")]
-		public int FatSaturatedG { get; set; }
+		public int? FatSaturatedG { get; set; }
 
 		/// <summary> "Total saturated fat in percentage" (Official Documentation) </summary> 
 		[JsonProperty("fat_saturated_percent")]
-		public int FatSaturatedPercent { get; set; }
+		public int? FatSaturatedPercent { get; set; }
 
 		/// <summary> "Total trans fat in grams" (Official Documentation) </summary> 
 		[JsonProperty("fat_trans_g")]
-		public int FatTransG { get; set; }
+		public int? FatTransG { get; set; }
 
 		/// <summary> "Total trans fat in percentage" (Official Documentation) </summary> 
 		[JsonProperty("fat_trans_percent")]
-		public int FatTransPercent { get; set; }
+		public int? FatTransPercent { get; set; }
 
 		/// <summary> "Total cholesterol in milligrams" (Official Documentation) </summary> 
 		[JsonProperty("cholesterol_mg")]
-		public int CholesterolMg { get; set; }
+		public int? CholesterolMg { get; set; }
 
 		/// <summary> "Sodium in milligrams" (Official Documentation) </summary> 
 		[JsonProperty("sodium_mg")]
-		public int SodiumMg { get; set; }
+		public int? SodiumMg { get; set; }
 
 		/// <summary> "Sodium in percentage" (Official Documentation) </summary> 
 		[JsonProperty("sodium_percent")]
-		public int SodiumPercent { get; set; }
+		public int? SodiumPercent { get; set; }
 
 		/// <summary> "Total carbohydrates in grams" (Official Documentation) </summary> 
 		[JsonProperty("carbo_g")]
-		public int CarboG { get; set; }
+		public int? CarboG { get; set; }
 
 		/// <summary> "Carbohydrates as percentage" (Official Documentation) </summary> 
 		[JsonProperty("carbo_percent")]
-		public int CarboPercent { get; set; }
+		public int? CarboPercent { get; set; }
 
 		/// <summary> "Carbohydrate fibres in grams" (Official Documentation) </summary> 
 		[JsonProperty("carbo_fibre_g")]
-		public int CarboFibreG { get; set; }
+		public int? CarboFibreG { get; set; }
 
 		/// <summary> "Carbohydrates fibers as percentage" (Official Documentation) </summary> 
 		[JsonProperty("carbo_fibre_percent")]
-		public int CarboFibrePercent { get; set; }
+		public int? CarboFibrePercent { get; set; }
 
 		/// <summary> "Carbohydrate sugar in grams" (Official Documentation) </summary> 
 		[JsonProperty("carbo_sugars_g")]
-		public int CarboSugarsG { get; set; }
+		public int? CarboSugarsG { get; set; }
 
 		/// <summary> "Total protein in grams" (Official Documentation) </summary> 
 		[JsonProperty("protein_g")]
-		public int ProteinG { get; set; }
+		public int? ProteinG { get; set; }
 
 		/// <summary> "Total vitamin A percentage" (Official Documentation) </summary> 
 		[JsonProperty("vitamin_a_percent")]
-		public int VitaminAPercent { get; set; }
+		public int? VitaminAPercent { get; set; }
 
 		/// <summary> "Total vitamin C percentage" (Official Documentation) </summary> 
 		[JsonProperty("vitamin_c_percent")]
-		public int VitaminCPercent { get; set; }
+		public int? VitaminCPercent { get; set; }
 
 		/// <summary> "Total calcium percentage" (Official Documentation) </summary> 
 		[JsonProperty("calcium_percent")]
-		public int CalciumPercent { get; set; }
+		public int? CalciumPercent { get; set; }
 
 		/// <summary> "Total iron percentage" (Official Documentation) </summary> 
 		[JsonProperty("iron_percent")]
-		public int IronPercent { get; set; }
+		public int? IronPercent { get; set; }
 
 		/// <summary> "Micro nutrients in item" (Official Documentation) </summary> 
 		[JsonProperty("micro_nutrients")]
@@ -305,7 +360,7 @@ namespace uWaterlooApi.FoodServices
 
 		/// <summary> "Foodservices given diet id" (Official Documentation) </summary> 
 		[JsonProperty("diet_id")]
-		public int DietId { get; set; }
+		public int? DietId { get; set; }
 
 		/// <summary> "String representation of the diet_id" (Official Documentation) </summary> 
 		[JsonProperty("diet_type")]
@@ -317,7 +372,7 @@ namespace uWaterlooApi.FoodServices
 	{
 		/// <summary> "Outlet ID number" (Official Documentation) </summary> 
 		[JsonProperty("vendor_id")]
-		public int VendorId { get; set; }
+		public int? VendorId { get; set; }
 
 		/// <summary> "Vendor name" (Official Documentation) </summary> 
 		[JsonProperty("vendor_name")]
@@ -333,7 +388,7 @@ namespace uWaterlooApi.FoodServices
 
 		/// <summary> "Foodservices ID for the outlet" (Official Documentation) </summary> 
 		[JsonProperty("outlet_id")]
-		public int OutletId { get; set; }
+		public int? OutletId { get; set; }
 
 		/// <summary> "The outlet menu list" (Official Documentation) </summary> 
 		public IEnumerable<Menu> Menu { get; set; }
@@ -343,7 +398,7 @@ namespace uWaterlooApi.FoodServices
 	public class WeeklyFoodMenu
 	{
 		/// <summary> "Menu date object" (Official Documentation) </summary> 
-		public object Date { get; set; }
+		public Date Date { get; set; }
 
 		/// <summary> "Available outlets" (Official Documentation) </summary> 
 		public IEnumerable<Outlets> Outlets { get; set; }
@@ -435,9 +490,9 @@ namespace uWaterlooApi.FoodServices
 		/// Update Frequency: On request (lib)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<FoodServicesProductDetails>> FoodServicesProductDetails(int productId)
+		public ApiRequest<FoodServicesProductDetails> FoodServicesProductDetails(int productId)
 		{
-			return ApiRequest<List<FoodServicesProductDetails>>.CreateApiRequest(string.Format("/foodservices/products/{0}", productId), _apiKey);
+			return ApiRequest<FoodServicesProductDetails>.CreateApiRequest(string.Format("/foodservices/products/{0}", productId), _apiKey);
 		}
 
 		/// <summary>
@@ -457,7 +512,7 @@ namespace uWaterlooApi.FoodServices
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<FoodServicesMenuAnnouncements>> FoodServicesMenuAnnouncements(int year, int week)
+		public ApiRequest<List<FoodServicesMenuAnnouncements>> FoodServicesMenuAnnouncements(int year, int? week)
 		{
 			return ApiRequest<List<FoodServicesMenuAnnouncements>>.CreateApiRequest(string.Format("/foodservices/{0}/{1}/announcements", year, week), _apiKey);
 		}
@@ -468,7 +523,7 @@ namespace uWaterlooApi.FoodServices
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<WeeklyFoodMenu> WeeklyFoodMenu(int year, int week)
+		public ApiRequest<WeeklyFoodMenu> WeeklyFoodMenu(int year, int? week)
 		{
 			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest(string.Format("/foodservices/{0}/{1}/menu", year, week), _apiKey);
 		}
@@ -479,7 +534,7 @@ namespace uWaterlooApi.FoodServices
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<FoodServicesMenuNotes>> FoodServicesMenuNotes(int year, int week)
+		public ApiRequest<List<FoodServicesMenuNotes>> FoodServicesMenuNotes(int year, int? week)
 		{
 			return ApiRequest<List<FoodServicesMenuNotes>>.CreateApiRequest(string.Format("/foodservices/{0}/{1}/notes", year, week), _apiKey);
 		}
