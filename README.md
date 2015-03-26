@@ -1,43 +1,60 @@
-# UWaterloo API C# Client
----
+UWaterloo API - C# Client
+-----
 
-##About
-A client library created in C# that allows users to quickly jump in and start using uWaterloo's OpenData API. 
+#About
 
-This will hopefully help create a lower barrier of entry to the API, as users will no longer have to worry about dynamics, WebClients, JSON, etc. 
+Calls API endpoints and converts the returned data into static typed objects.
 
-##Usage
+Lower barrier of entry to the API as you can quickly use it; regardless of your knowledge about WebClients, Deserilzation, etc.
 
-API calls are made by calling endpoints on the UWaterloApi class. e.g. `uWaterlooApi.FoodServices.WeeklyFoodMenu(2013, 12)`
+#Installation
 
-All API calls return type uWaterlooApi.ApiRequest &lt;T&gt; where T is the data class revelent to the API call.
+Distributed via Nuget. More information to follow
+
+#Usage
+
+API calls are made by calling members on the UWaterlooApi class.
+e.g. `uWaterlooApi.FoodServices.WeeklyFoodMenu(2013, 12)`
+
+All API calls return uWaterlooApi.ApiRequest &lt;T&gt; where T is the static typed object that deals with the particular API call.
 
 ApiRequest&lt;T&gt; is a wrapper containing 2 fields: meta, and data.
-- meta cotnains information about the API call.
-- data is type T and contains the relevent data returned from the API call.
+- `meta` contains information about the api called (that was returned by the server).
+- `data` of type T and contains the data section returend from the API call.
 
 
-####Examples
+#Examples
 
 ```C#
-using uWaterlooApi;
 UWaterlooApi uWaterlooApiClient = new UWaterlooApi("YOUR-API-KEY");
 ```
 
+To get the Weekly Food menu for the 12th week of 2013
 
-To get the Weekly Food menu for the 12th week of 2013 
 ```C#
 var foodServicesWeeklyMenu = uwaterlooApiClient.FoodServices.WeeklyFoodMenu(2013, 12);
 ```
 
-##Where do I get my API key?
+#Where do I get my API key?
 https://api.uwaterloo.ca/
 
-## Dependencies 
+#Contributing
+Any contributes are welcome, however help is most needed with documentation, and testing.
+
+If you notice any bugs feel free to either submit an issue, or if you have the technical knowhow to fix it yourself, feel free to fork, fix, and submit a pull request.
+
+#Implementation
+
+Info about each file
+
+#Where do I get my API key?
+https://api.uwaterloo.ca/
+
+#Dependencies
 * **Newtonsoft.Json**
 
-## Acknowledgments
+#Acknowledgments
 * **University of Waterloo**
 
-## Licensing
+#Licensing
 The MIT License (MIT), see "LICENSE.txt" for more details.
