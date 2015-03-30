@@ -1,5 +1,5 @@
-﻿// Copyright (c) Robinson Mann
-// Licensed under the MIT License, See LICENSE.txt for more information.
+﻿/* By Robinson Mann 
+ * Licensed under the MIT License, See LICENSE.txt for more information. */
 
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -11,7 +11,7 @@ namespace UWaterlooApi.Server
 	public class ServerErrorCodes
 	{
 		/// <summary> "Numerical value of the Error code" (Official Documentation) </summary> 
-		public int Code { get; set; }
+		public int? Code { get; set; }
 
 		/// <summary> "Accompanying error message" (Official Documentation) </summary> 
 		public string Message { get; set; }
@@ -21,7 +21,7 @@ namespace UWaterlooApi.Server
 	public class ServerTime
 	{
 		/// <summary> "Current UNIX timestamp" (Official Documentation) </summary> 
-		public int Timestamp { get; set; }
+		public int? Timestamp { get; set; }
 
 		/// <summary> "ISO8601 compatible current server timestamp" (Official Documentation) </summary> 
 		public string Datetime { get; set; }
@@ -31,7 +31,7 @@ namespace UWaterlooApi.Server
 
 		/// <summary> "UNIX timestamp of when the api call quota will reset" (Official Documentation) </summary> 
 		[JsonProperty("key_reset_time")]
-		public int KeyResetTime { get; set; }
+		public int? KeyResetTime { get; set; }
 	}
 
 	/// <summary> Server Endpoints </summary> 

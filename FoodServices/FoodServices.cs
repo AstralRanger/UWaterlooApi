@@ -1,5 +1,5 @@
-﻿// Copyright (c) Robinson Mann
-// Licensed under the MIT License, See LICENSE.txt for more information.
+﻿/* By Robinson Mann 
+ * Licensed under the MIT License, See LICENSE.txt for more information. */
 
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -512,7 +512,7 @@ namespace UWaterlooApi.FoodServices
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<FoodServicesMenuAnnouncements>> FoodServicesMenuAnnouncements(int year, int? week)
+		public ApiRequest<List<FoodServicesMenuAnnouncements>> FoodServicesMenuAnnouncements(int year, int week)
 		{
 			return ApiRequest<List<FoodServicesMenuAnnouncements>>.CreateApiRequest(string.Format("/foodservices/{0}/{1}/announcements", year, week), _apiKey);
 		}
@@ -523,7 +523,7 @@ namespace UWaterlooApi.FoodServices
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<WeeklyFoodMenu> WeeklyFoodMenu(int year, int? week)
+		public ApiRequest<WeeklyFoodMenu> WeeklyFoodMenu(int year, int week)
 		{
 			return ApiRequest<WeeklyFoodMenu>.CreateApiRequest(string.Format("/foodservices/{0}/{1}/menu", year, week), _apiKey);
 		}
@@ -534,7 +534,7 @@ namespace UWaterlooApi.FoodServices
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<FoodServicesMenuNotes>> FoodServicesMenuNotes(int year, int? week)
+		public ApiRequest<List<FoodServicesMenuNotes>> FoodServicesMenuNotes(int year, int week)
 		{
 			return ApiRequest<List<FoodServicesMenuNotes>>.CreateApiRequest(string.Format("/foodservices/{0}/{1}/notes", year, week), _apiKey);
 		}

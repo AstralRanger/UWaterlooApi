@@ -1,11 +1,33 @@
-﻿// Copyright (c) Robinson Mann
-// Licensed under the MIT License, See LICENSE.txt for more information.
+﻿/* By Robinson Mann 
+ * Licensed under the MIT License, See LICENSE.txt for more information. */
 
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace UWaterlooApi.Resources
 {
+
+	/// <summary> "List of student tutors available" (Official Documentation) </summary> 
+	public class ListOfStudentTutorsAvailable
+	{
+		/// <summary> "Subject acronym" (Official Documentation) </summary> 
+		public string Subject { get; set; }
+
+		/// <summary> "Course catalog number" (Official Documentation) </summary> 
+		[JsonProperty("catalog_number")]
+		public string CatalogNumber { get; set; }
+
+		/// <summary> "Course title" (Official Documentation) </summary> 
+		public string Title { get; set; }
+
+		/// <summary> "Total number of tutors available for that course" (Official Documentation) </summary> 
+		[JsonProperty("tutors_count")]
+		public int? TutorsCount { get; set; }
+
+		/// <summary> "Link to get tutor contact details" (Official Documentation) </summary> 
+		[JsonProperty("contact_url")]
+		public string ContactUrl { get; set; }
+	}
 
 	/// <summary> "List of geese nests" (Official Documentation) </summary> 
 	public class ListOfGeeseNests
@@ -17,10 +39,10 @@ namespace UWaterlooApi.Resources
 		public string Location { get; set; }
 
 		/// <summary> "Latitude of goose nest location" (Official Documentation) </summary> 
-		public double Latitude { get; set; }
+		public double? Latitude { get; set; }
 
 		/// <summary> "Longitude of goose nest location" (Official Documentation) </summary> 
-		public double Longitude { get; set; }
+		public double? Longitude { get; set; }
 
 		/// <summary> "ISO 8601 time-stamp of last update" (Official Documentation) </summary> 
 		public string Updated { get; set; }
@@ -87,28 +109,6 @@ namespace UWaterlooApi.Resources
 		public string Faculty { get; set; }
 	}
 
-	/// <summary> "List of student tutors available" (Official Documentation) </summary> 
-	public class ListOfStudentTutorsAvailable
-	{
-		/// <summary> "Subject acronym" (Official Documentation) </summary> 
-		public string Subject { get; set; }
-
-		/// <summary> "Course catalog number" (Official Documentation) </summary> 
-		[JsonProperty("catalog_number")]
-		public string CatalogNumber { get; set; }
-
-		/// <summary> "Course title" (Official Documentation) </summary> 
-		public string Title { get; set; }
-
-		/// <summary> "Total number of tutors available for that course" (Official Documentation) </summary> 
-		[JsonProperty("tutors_count")]
-		public int TutorsCount { get; set; }
-
-		/// <summary> "Link to get tutor contact details" (Official Documentation) </summary> 
-		[JsonProperty("contact_url")]
-		public string ContactUrl { get; set; }
-	}
-
 	/// <summary> Resources Endpoints </summary> 
 	public class ResourcesApi
 	{
@@ -121,6 +121,17 @@ namespace UWaterlooApi.Resources
 		public ResourcesApi(string apiKey)
 		{
 			_apiKey = apiKey;
+		}
+
+		/// <summary>
+		/// Official Method Name: List of student tutors available
+		/// Description: This method returns a list of all the tutors available to help for a course for a given term
+		/// Update Frequency: As the data updates by SSO
+		/// All the above information is from the Official Documentation
+		/// </summary>
+		public ApiRequest<List<ListOfStudentTutorsAvailable>> ListOfStudentTutorsAvailable()
+		{
+			return ApiRequest<List<ListOfStudentTutorsAvailable>>.CreateApiRequest("/resources/tutors", _apiKey);
 		}
 
 		/// <summary>
@@ -154,17 +165,6 @@ namespace UWaterlooApi.Resources
 		public ApiRequest<List<ListOfCampusPrinter>> ListOfCampusPrinter()
 		{
 			return ApiRequest<List<ListOfCampusPrinter>>.CreateApiRequest("/resources/printers", _apiKey);
-		}
-
-		/// <summary>
-		/// Official Method Name: List of student tutors available
-		/// Description: This method returns a list of all the tutors available to help for a course for a given term
-		/// Update Frequency: As the data updates by SSO
-		/// All the above information is from the Official Documentation
-		/// </summary>
-		public ApiRequest<List<ListOfStudentTutorsAvailable>> ListOfStudentTutorsAvailable()
-		{
-			return ApiRequest<List<ListOfStudentTutorsAvailable>>.CreateApiRequest("/resources/tutors", _apiKey);
 		}
 
 	}

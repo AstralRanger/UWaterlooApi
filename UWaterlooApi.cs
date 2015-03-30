@@ -1,5 +1,5 @@
-﻿// Copyright (c) Robinson Mann
-// Licensed under the MIT License, See LICENSE.txt for more information.
+﻿/* By Robinson Mann 
+ * Licensed under the MIT License, See LICENSE.txt for more information. */
 
 using System.Net;
 using Newtonsoft.Json;
@@ -22,25 +22,67 @@ namespace UWaterlooApi
 	/// </summary>
     public class UWaterlooApi
     {
-		// Api endpoints
+		/// <summary>
+		/// Food Services Endpoints
+		/// </summary>
 		public readonly FoodServicesApi FoodServices;
+
+		/// <summary>
+		/// Courses Endpoints
+		/// </summary>
 		public readonly CoursesApi Courses;
+
+		/// <summary>
+		/// Event Endpoints
+		/// </summary>
 		public readonly EventsApi Events;
+
+		/// <summary>
+		/// New Endpoints
+		/// </summary>
 		public readonly NewsApi News;
+
+		/// <summary>
+		/// Weather Endpoints
+		/// </summary>
 		public readonly WeatherApi Weather;
+
+		/// <summary>
+		/// Terms Endpoints
+		/// </summary>
 		public readonly TermsApi Terms;
+
+		/// <summary>
+		/// Resources Endpoints
+		/// </summary>
 		public readonly ResourcesApi Resources;
+
+		/// <summary>
+		/// Definitions and Codes Endpoints
+		/// </summary>
 		public readonly DefinitionsAndCodesApi DefinitionsAndCodes;
+
+		/// <summary>
+		/// Buildings Endpoints
+		/// </summary>
 		public readonly BuildingsApi Buildings;
+
+		/// <summary>
+		/// Api Endpoints
+		/// </summary>
 		public readonly ApiApi Api;
+
+		/// <summary>
+		/// Server Endpoints
+		/// </summary>
 		public readonly ServerApi Server;
+
 
 		/// <summary>
 		/// Default constructor 
 		/// </summary>
 		/// <param name="apiKey">UWaterloo API Key</param>
 		public UWaterlooApi(string apiKey) {
-
 			// Initializing endpoints
 			FoodServices = new FoodServicesApi(apiKey);
 			Courses = new CoursesApi(apiKey);
@@ -53,7 +95,6 @@ namespace UWaterlooApi
 			Buildings = new BuildingsApi(apiKey);
 			Api = new ApiApi(apiKey);
 			Server = new ServerApi(apiKey);
-
 		}
 	}
 

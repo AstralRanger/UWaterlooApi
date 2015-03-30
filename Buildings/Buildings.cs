@@ -1,5 +1,5 @@
-﻿// Copyright (c) Robinson Mann
-// Licensed under the MIT License, See LICENSE.txt for more information.
+﻿/* By Robinson Mann 
+ * Licensed under the MIT License, See LICENSE.txt for more information. */
 
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -15,10 +15,10 @@ namespace UWaterlooApi.Buildings
 		public List<string> SectionName { get; set; }
 
 		/// <summary> "Latitude of building section location" (Official Documentation) </summary> 
-		public double Latitude { get; set; }
+		public double? Latitude { get; set; }
 
 		/// <summary> "Longitude of building section location" (Official Documentation) </summary> 
-		public double Longitude { get; set; }
+		public double? Longitude { get; set; }
 	}
 
 	/// <summary> "Building Details" (Official Documentation) </summary> 
@@ -37,10 +37,10 @@ namespace UWaterlooApi.Buildings
 		public List<string> AlternateNames { get; set; }
 
 		/// <summary> "Latitude of building location" (Official Documentation) </summary> 
-		public double Latitude { get; set; }
+		public double? Latitude { get; set; }
 
 		/// <summary> "Longitude of building location" (Official Documentation) </summary> 
-		public double Longitude { get; set; }
+		public double? Longitude { get; set; }
 
 		/// <summary> "List of building sections" (Official Documentation) </summary> 
 		[JsonProperty("building_sections")]
@@ -52,7 +52,7 @@ namespace UWaterlooApi.Buildings
 	{
 		/// <summary> "Class Number" (Official Documentation) </summary> 
 		[JsonProperty("class_number")]
-		public int ClassNumber { get; set; }
+		public int? ClassNumber { get; set; }
 
 		/// <summary> "Course subject code" (Official Documentation) </summary> 
 		public string Subject { get; set; }
@@ -88,7 +88,7 @@ namespace UWaterlooApi.Buildings
 
 		/// <summary> "Number of students currently enrolled in the section" (Official Documentation) </summary> 
 		[JsonProperty("enrollment_total")]
-		public int EnrollmentTotal { get; set; }
+		public int? EnrollmentTotal { get; set; }
 
 		/// <summary> "List of instructors the individual meet" (Official Documentation) </summary> 
 		public List<string> Instructors { get; set; }
@@ -100,13 +100,13 @@ namespace UWaterlooApi.Buildings
 		public string Room { get; set; }
 
 		/// <summary> "Particular 4-month period within which sessions are defined" (Official Documentation) </summary> 
-		public int Term { get; set; }
+		public int? Term { get; set; }
 
 		/// <summary> "Server time at last update (in ISO 8601 format)" (Official Documentation) </summary> 
 		[JsonProperty("last_updated")]
 		public string LastUpdated { get; set; }
 	}
-	
+
 	/// <summary> "Buildings" (Official Documentation) </summary> 
 	public class Buildings
 	{
@@ -123,10 +123,10 @@ namespace UWaterlooApi.Buildings
 		public List<string> AlternateNames { get; set; }
 
 		/// <summary> "Latitude of building location" (Official Documentation) </summary> 
-		public double Latitude { get; set; }
+		public double? Latitude { get; set; }
 
 		/// <summary> "Longitude of building location" (Official Documentation) </summary> 
-		public double Longitude { get; set; }
+		public double? Longitude { get; set; }
 
 		/// <summary> "List of building sections" (Official Documentation) </summary> 
 		[JsonProperty("building_sections")]
