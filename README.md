@@ -11,7 +11,13 @@ The motivation for this project was to create a lower barrier of entry to the AP
 
 ##Installation
 
-Distributed via Nuget. More information to follow
+Distributed via NuGet. You can find the package page [here](https://www.nuget.org/packages/UWaterlooApi/)
+
+To install UWaterloo API Client, run the following command in the Package Manager Console
+
+```
+PM> Install-Package UWaterlooApi
+```
 
 ##Usage
 
