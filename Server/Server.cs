@@ -65,9 +65,9 @@ namespace UWaterlooApi.Server
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<ServerTime>> ServerTime()
+		public ApiRequest<ServerTime> ServerTime()
 		{
-			return ApiRequest<List<ServerTime>>.CreateApiRequest("/server/time", _apiKey);
+			return ApiRequest<ServerTime>.CreateApiRequest("/server/time", _apiKey);
 		}
 
 	}

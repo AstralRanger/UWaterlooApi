@@ -132,9 +132,9 @@ namespace UWaterlooApi.Api
 		/// Update Frequency: Every request (live)
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<ApiUsageStats>> ApiUsageStats()
+		public ApiRequest<ApiUsageStats> ApiUsageStats()
 		{
-			return ApiRequest<List<ApiUsageStats>>.CreateApiRequest("/api/usage", _apiKey);
+			return ApiRequest<ApiUsageStats>.CreateApiRequest("/api/usage", _apiKey);
 		}
 
 		/// <summary>

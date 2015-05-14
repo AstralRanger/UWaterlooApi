@@ -142,14 +142,14 @@ namespace UWaterlooApi.Terms
 		public string Topic { get; set; }
 
 		/// <summary> "Course specific enrollment reservation data" (Official Documentation) </summary> 
-		public Reserves Reserves { get; set; }
+		public IEnumerable<Reserves> Reserves { get; set; }
 
 		/// <summary> "Schedule data" (Official Documentation) </summary> 
-		public Classes Classes { get; set; }
+		public IEnumerable<Classes> Classes { get; set; }
 
 		/// <summary> "A list of classes the course is held with" (Official Documentation) </summary> 
 		[JsonProperty("held_with")]
-		public IList<string> HeldWith { get; set; }
+		public IEnumerable<string> HeldWith { get; set; }
 
 		/// <summary> "4 digit term representation" (Official Documentation) </summary> 
 		public int? Term { get; set; }
@@ -224,10 +224,10 @@ namespace UWaterlooApi.Terms
 		public string Topic { get; set; }
 
 		/// <summary> "Course specific enrollment reservation data" (Official Documentation) </summary> 
-		public Reserves Reserves { get; set; }
+		public IEnumerable<Reserves> Reserves { get; set; }
 
 		/// <summary> "Schedule data" (Official Documentation) </summary> 
-		public Classes Classes { get; set; }
+		public IEnumerable<Classes> Classes { get; set; }
 
 		/// <summary> "A list of classes the course is held with" (Official Documentation) </summary> 
 		[JsonProperty("held_with")]
@@ -394,7 +394,7 @@ namespace UWaterlooApi.Terms
 		/// Update Frequency: Once a day
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<ExamSchedule>> ExamSchedule(string term)
+		public ApiRequest<List<ExamSchedule>> ExamSchedule(int term)
 		{
 			return ApiRequest<List<ExamSchedule>>.CreateApiRequest(string.Format("/terms/{0}/examschedule", term), _apiKey);
 		}
@@ -405,7 +405,7 @@ namespace UWaterlooApi.Terms
 		/// Update Frequency: Weekly
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<EmployerInfoSessionsByTerm>> EmployerInfoSessionsByTerm(string term)
+		public ApiRequest<List<EmployerInfoSessionsByTerm>> EmployerInfoSessionsByTerm(int term)
 		{
 			return ApiRequest<List<EmployerInfoSessionsByTerm>>.CreateApiRequest(string.Format("/terms/{0}/infosessions", term), _apiKey);
 		}
@@ -416,9 +416,9 @@ namespace UWaterlooApi.Terms
 		/// Update Frequency: Every hour
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<CourseScheduleByTerm>> CourseScheduleByTerm(string term, string subject, string catalogNumber)
+		public ApiRequest<List<CourseScheduleByTerm>> CourseScheduleByTerm(int term, string subject, string catalogNumber)
 		{
-			return ApiRequest<List<CourseScheduleByTerm>>.CreateApiRequest(string.Format("/terms/{{{0}/{1}/{2}/schedule", term, subject, catalogNumber), _apiKey);
+			return ApiRequest<List<CourseScheduleByTerm>>.CreateApiRequest(string.Format("/terms/{0}/{1}/{2}/schedule", term, subject, catalogNumber), _apiKey);
 		}
 
 		/// <summary>
@@ -427,7 +427,7 @@ namespace UWaterlooApi.Terms
 		/// Update Frequency: Every hour
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<SubjectScheduleByTerm>> SubjectScheduleByTerm(string term, string subject)
+		public ApiRequest<List<SubjectScheduleByTerm>> SubjectScheduleByTerm(int term, string subject)
 		{
 			return ApiRequest<List<SubjectScheduleByTerm>>.CreateApiRequest(string.Format("/terms/{0}/{1}/schedule", term, subject), _apiKey);
 		}

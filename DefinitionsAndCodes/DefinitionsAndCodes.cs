@@ -50,7 +50,7 @@ namespace UWaterlooApi.DefinitionsAndCodes
 	public class CodeLookupsForTerms
 	{
 		/// <summary> "Term" (Official Documentation) </summary> 
-		public string Term { get; set; }
+		public string Abbreviation { get; set; }
 
 		/// <summary> "Description of term" (Official Documentation) </summary> 
 		public string Description { get; set; }

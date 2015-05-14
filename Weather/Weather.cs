@@ -105,9 +105,9 @@ namespace UWaterlooApi.Weather
 		/// Update Frequency: Every 15 minutes
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<CurrentWeather>> CurrentWeather()
+		public ApiRequest<CurrentWeather> CurrentWeather()
 		{
-			return ApiRequest<List<CurrentWeather>>.CreateApiRequest("/weather/current", _apiKey);
+			return ApiRequest<CurrentWeather>.CreateApiRequest("/weather/current", _apiKey);
 		}
 
 	}

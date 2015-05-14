@@ -153,9 +153,9 @@ namespace UWaterlooApi.Buildings
 		/// Update Frequency: When updated by the steward/via github pull request
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<BuildingDetails>> BuildingDetails(string buildingCode)
+		public ApiRequest<BuildingDetails> BuildingDetails(string buildingCode)
 		{
-			return ApiRequest<List<BuildingDetails>>.CreateApiRequest(string.Format("/buildings/{0}", buildingCode), _apiKey);
+			return ApiRequest<BuildingDetails>.CreateApiRequest(string.Format("/buildings/{0}", buildingCode), _apiKey);
 		}
 
 		/// <summary>
@@ -164,11 +164,12 @@ namespace UWaterlooApi.Buildings
 		/// Update Frequency: Every hour on weekdays
 		/// All the above information is from the Official Documentation
 		/// </summary>
-		public ApiRequest<List<CoursesInAClassroom>> CoursesInAClassroom(string building, int room)
+		public ApiRequest<List<CoursesInAClassroom>> CoursesInAClassroom(string building, string room)
 		{
 			return ApiRequest<List<CoursesInAClassroom>>.CreateApiRequest(string.Format("/buildings/{0}/{1}/courses", building, room), _apiKey);
+		
 		}
-
+		
 		/// <summary>
 		/// Official Method Name: Buildings
 		/// Description: This method returns a list of official building names, their unique number and their lat/long coordinates.
