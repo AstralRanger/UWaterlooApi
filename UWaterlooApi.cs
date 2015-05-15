@@ -20,8 +20,8 @@ namespace UWaterlooApi
 	/// <summary>
 	/// UWaterlooAPI Class
 	/// </summary>
-    public class UWaterlooApi
-    {
+	public class UWaterlooApi
+	{
 		/// <summary>
 		/// Food Services Endpoints
 		/// </summary>
@@ -76,7 +76,6 @@ namespace UWaterlooApi
 		/// Server Endpoints
 		/// </summary>
 		public readonly ServerApi Server;
-
 
 		/// <summary>
 		/// Default constructor 
