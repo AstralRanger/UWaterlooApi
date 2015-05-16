@@ -3,9 +3,7 @@ UWaterloo API - C# Client
 
 ##About
 
-Calls University of Waterloo API endpoints and converts the returned data into static typed objects.
-
-For the API's documentation visit [here](https://github.com/uWaterloo/api-documentation)
+Calls University of Waterloo API endpoints and converts the returned data into static typed objects. For a list of endpoints, visit the API's offical documentation [here](https://github.com/uWaterloo/api-documentation)
 
 The motivation for this project was to create a lower barrier of entry to the API, as users no longer have to worry about WebClients, Deserilzation, etc.
 
